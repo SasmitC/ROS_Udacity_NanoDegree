@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/sasmit/UdacityROS/catkin_ws/install/setup.sh
