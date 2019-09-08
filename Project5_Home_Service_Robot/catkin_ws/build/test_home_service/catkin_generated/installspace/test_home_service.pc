@@ -1,0 +1,8 @@
+prefix=/home/workspace/catkin_ws/install
+
+Name: test_home_service
+Description: Description of test_home_service
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/workspace/catkin_ws/install/lib 
+Requires: 

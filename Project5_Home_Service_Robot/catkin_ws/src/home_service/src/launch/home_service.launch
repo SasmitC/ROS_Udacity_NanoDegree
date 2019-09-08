@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find home_service)/src/rviz/home_service_navigation.rviz" required="true"/>
+</launch>

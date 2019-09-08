@@ -1,0 +1,8 @@
+prefix=/home/workspace/catkin_ws/install
+
+Name: home_service_add_markers
+Description: Description of home_service_add_markers
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/workspace/catkin_ws/install/lib 
+Requires: roscpp visualization_msgs geometry_msgs tf
