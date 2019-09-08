@@ -1,0 +1,8 @@
+prefix=/home/workspace/catkin_ws/install
+
+Name: localization_project
+Description: Description of localization_project
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/workspace/catkin_ws/install/lib 
+Requires: 

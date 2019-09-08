@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="model" />
+	<!-- Parsing xacro and setting robot_description parameter -->
+	<param name="robot_description" command="$(find xacro)/xacro --inorder $(find my_robot)/urdf/my_robot.xacro" />
+	<!-- Setting gui parameter to false/true for display joint slider -->
+	<param name="use_gui" value="false"/>
+	<!-- Starting Joint state publisher node which will publish the joint values -->
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"> 
+		<param name="use_gui" value="false"/>
+	</node>
+	<!-- Starting robot state publish which will publish tf -->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+	<!-- Launch visualization in rviz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_robot)/rviz/amclRviz.rviz" required="true" />
+</launch>
