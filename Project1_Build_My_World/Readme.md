@@ -21,17 +21,17 @@ In this project, I created a Gazebo simulation of an office environment that goe
 
 2. [ROS](http://wiki.ros.org/kinetic/Installation) kinetic version.
 
-   ![kinetic_logo](../kinetic.png)
+   ![kinetic_logo](kinetic.png)
    
 3. [C++](https://www.udacity.com/course/c-for-programmers--ud210)
 
 4. [GitHub](https://www.udacity.com/course/version-control-with-git--ud123)
 
-   ![github_logo](../github-logo.jpg)
+   ![github_logo](github-logo.jpg)
    
 5. [Gazebo](http://gazebosim.org/) as the simulation environment.
 
-   ![gazebo_logo](../gazebo-logo.png)
+   ![gazebo_logo](gazebo-logo.png)
 
 
 ### How to use
