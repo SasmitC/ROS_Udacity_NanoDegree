@@ -19,12 +19,12 @@ In this project, I created a Gazebo simulation of an office environment that goe
 ### Requirements
 1. Linux OS or a Virtual Machine on Windows/Mac platform, for eg. [Oracle VM VirtualBox](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html). This project has been developed on Ubuntu 16.04 desktop version of Linux OS using command line.
 2. [ROS](http://wiki.ros.org/kinetic/Installation) kinetic version.
-   ![kinetic_logo](kinetic.png)
+   ![kinetic_logo](../kinetic.png)
 3. [C++](https://www.udacity.com/course/c-for-programmers--ud210)
 4. [GitHub](https://www.udacity.com/course/version-control-with-git--ud123)
-   ![github_logo](github-logo.png)
+   ![github_logo](../github-logo.png)
 5. [Gazebo](http://gazebosim.org/) as the simulation environment.
-   ![gazebo_logo](gazebo-logo.jpg)
+   ![gazebo_logo](../gazebo-logo.jpg)
 
 
 ### How to use
