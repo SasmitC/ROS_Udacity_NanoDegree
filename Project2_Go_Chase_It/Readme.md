@@ -322,12 +322,17 @@ Now place the white ball at different positions in front of the robot and see if
 You should observe something like the following:
 
 ![Screenshot1](default_gzclient_camera(2).jpg "Gazebo World View")
+
 ![Screenshot2](default_gzclient_camera(3).jpg "Gazebo Robot Top View")
+
 ![Screenshot3](default_gzclient_camera(1).jpg "Gazebo Chasing the Ball")
+
 ![Screenshot4](rqt_image.png "rqt_image_viewer Chasing the Ball")
 
 A video demonstration of the project:
 [![Project2Demo](ScreenshotVideo.png)](https://youtu.be/WoI3yUCTPGI "Go Chase It!")
+_Click on the image above to redirect to Youtube URL_
+
 ### Future Work
 Implement skid-steer robot designs or robots that can chase balls of any color.
 
