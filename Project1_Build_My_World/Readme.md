@@ -79,11 +79,100 @@ $ gazebo MyOfficeWorld.world
 ```
 
 ### Directory Structure
+```bash
+.Project1_Build_My_World
+├── catkin
+│   ├── build
+│   │   ├── **/*.css
+│   ├── model
+│   │   ├── MyRobot
+│   │   │   ├── model.config
+│   │   │   ├── model.sdf
+│   │   ├── MyUdacityOffice
+│   │   │   ├── model.config
+│   │   │   ├── model.sdf
+│   ├── script
+│   │   ├── welcome.cpp
+│   ├── world
+│   │   ├── MyOfficeWorld.world
+└── Readme.md
+```
 
 ### Implementation
+I created my world file and robot model file which I will use for all the subsequent projects throughout this Nanodegree Program.
+
+1. Build a single floor wall structure using the Building Editor tool in Gazebo. Apply several features, colours, and optionally textures to the structure. Make sure there's enough space between the walls for a robot to navigate.
+2. Model any object of your choice using the Model Editor tool in Gazebo. Your model links should be connected with joints.
+Import your structure and two instances of your model inside an empty Gazebo World.
+3. Import several models from the Gazebo online library and implement it in your existing Gazebo world.
+4. Write a C++ World Plugin to interact with your world. Your code should display “Welcome to <your>’s World!” message as soon as you launch the Gazebo world file.
+  
+These are basic tasks to be performed while building a world file of your own.
+
+#### World Files
+A **.world** file contains all the entities in the simulated environment. They are robot models, lighting, sensors and other features. You can save the file with a ```sh .world ``` extension.
+
+To launch a .world file enter the following into terminal - 
+```sh
+$ gazebo <yourworld>.world
+```
+
+The **world** file is formatted  using the simulation description format or **.sdf** in short. This is how a **SDF word** file template looks like - 
+
+```xml
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <physics type="ode">
+      ...
+    </physics>
+
+    <scene>
+      ...
+    </scene>
+
+    <model name="box">
+      ...
+    </model>
+
+    <model name="sphere">
+      ...
+    </model>
+
+    <light name="spotlight">
+      ...
+    </light>
+
+  </world>
+</sdf>
+```
+You can also include a model file inside your **world** file - 
+```xml
+<include>
+  <uri>model://model_file_name</uri>
+</include>
+```
+Furthermore, you can add a plugin for it to interact with gazebo environment -
+Add this 
+```xml
+<plugin name="hello" filename="libhello.so"/>
+```
+below 
+```xml
+<world name="default">
+```
+
+#### Troubleshooting
+The best way to troubleshoot your Gazebo errors afinst failure to load plugins or its components is by executing the following command in the terminal -
+```sh
+$ gazebo myworld --verbose
+```
 
 ### Future Work
+Implement multiple models that interact through model plugins inside the Gazebo world. Explore additional features of Gazebo simulation environment.
 
 ### License
+MIT License
 
 ### Contribution
+You may contribute to this project by forking this GitHub repository, creating pull requests or by raising issues.
