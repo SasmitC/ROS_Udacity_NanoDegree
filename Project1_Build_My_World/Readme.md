@@ -19,7 +19,7 @@ In this project, I created a Gazebo simulation of an office environment that goe
 ### Requirements
 1. Linux OS or a Virtual Machine on Windows/Mac platform, for eg. [Oracle VM VirtualBox](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html). This project has been developed on Ubuntu 16.04 desktop version of Linux OS using the command line.
 
-2. [ROS](http://wiki.ros.org/kinetic/Installation) kinetic version.
+2. [ROS](http://wiki.ros.org/kinetic/Installation) kinetic version
 
    ![kinetic_logo](kinetic.png)
    
@@ -29,7 +29,7 @@ In this project, I created a Gazebo simulation of an office environment that goe
 
    ![github_logo](github-logo.jpg)
    
-5. [Gazebo](http://gazebosim.org/) as the simulation environment.
+5. [Gazebo](http://gazebosim.org/) as the simulation environment
 
    ![gazebo_logo](gazebo-logo.png)
 
@@ -81,7 +81,7 @@ $ gazebo MyOfficeWorld.world
 ### Directory Structure
 ```bash
 .Project1_Build_My_World
-├── catkin
+├── catkin_ws
 │   ├── build
 │   │   ├── ...
 │   ├── model
