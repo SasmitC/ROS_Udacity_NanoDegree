@@ -27,7 +27,7 @@ In this project, I created a Gazebo simulation of an office environment that goe
 
 4. [GitHub](https://www.udacity.com/course/version-control-with-git--ud123)
 
-   ![github_logo](../github-logo.png)
+   ![github_logo](../github-logo.jpg)
    
 5. [Gazebo](http://gazebosim.org/) as the simulation environment.
 
