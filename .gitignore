@@ -1,0 +1,10 @@
+*.make
+*.cmake
+*.txt
+*.py
+*.sh
+*.bash
+*.zsh
+*.stamp
+*.lisp
+*.c
