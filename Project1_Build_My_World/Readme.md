@@ -17,7 +17,7 @@ In this project, I created a Gazebo simulation of an office environment that goe
 
 
 ### Requirements
-1. Linux OS or a Virtual Machine on Windows/Mac platform, for eg. [Oracle VM VirtualBox](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html). This project has been developed on Ubuntu 16.04 desktop version of Linux OS using command line.
+1. Linux OS or a Virtual Machine on Windows/Mac platform, for eg. [Oracle VM VirtualBox](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html). This project has been developed on Ubuntu 16.04 desktop version of Linux OS using the command line.
 
 2. [ROS](http://wiki.ros.org/kinetic/Installation) kinetic version.
 
@@ -52,7 +52,7 @@ $ curl -sSL http://get.gazebosim.org | sh
 $ gazebo
 ```
 
-3. Now that catkin_ws is setup locally on your machine, Clone this repository to your desired path using -
+3. Now that catkin_ws is set up locally on your machine, Clone this repository to your desired path using -
 ```sh
 $ git clone https://github.com/SasmitC/ROS_Udacity_NanoDegree.git
 $ cd ROS_Udacity_NanoDegree
@@ -66,7 +66,7 @@ $ cd ~/catkin_ws
 $ catkin_make
 ```
 
-6. Add following to your .bashrc file, so that you do not need to source the environment while opening a new terminal window each time -
+6. Add the following to your .bashrc file, so that you do not need to source the environment while opening a new terminal window each time -
 ```sh
 export GAZEBO_MODEL_PATH=~/catkin_ws/model/MyUdacityOffice
 source ~/catkin_ws/devel/setup.bash
@@ -83,7 +83,7 @@ $ gazebo MyOfficeWorld.world
 .Project1_Build_My_World
 ├── catkin
 │   ├── build
-│   │   ├── **/*.css
+│   │   ├── ...
 │   ├── model
 │   │   ├── MyRobot
 │   │   │   ├── model.config
@@ -117,7 +117,7 @@ To launch a .world file enter the following into terminal -
 $ gazebo <yourworld>.world
 ```
 
-The **world** file is formatted  using the simulation description format or **.sdf** in short. This is how a **SDF word** file template looks like - 
+The **world** file is formatted using the simulation description format or **.sdf** in short. This is how a **SDF word** file template looks like - 
 
 ```xml
 <?xml version="1.0" ?>
@@ -162,14 +162,18 @@ below
 <world name="default">
 ```
 
+![screenshot1](default_gzclient_camera_myworld_1.jpg "MyOfficeWorld.world")
+
+![screenshot2](default_gzclient_camera_myworld_4.jpg "Model Editor")
+
 #### Troubleshooting
-The best way to troubleshoot your Gazebo errors afinst failure to load plugins or its components is by executing the following command in the terminal -
+The best way to troubleshoot your Gazebo errors against failure to load plugins or its components is by executing the following command in the terminal -
 ```sh
 $ gazebo myworld --verbose
 ```
 
 ### Future Work
-Implement multiple models that interact through model plugins inside the Gazebo world. Explore additional features of Gazebo simulation environment.
+Implement multiple models that interact through model plugins inside the Gazebo world. Explore additional features of the Gazebo simulation environment.
 
 ### License
 MIT License
