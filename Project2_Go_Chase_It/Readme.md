@@ -25,17 +25,53 @@ This project introduces the student to write ROS Nodes in C++ and explore the va
 2. Github
 3. C++
 4. ROS kinetic version
-5. Gazebo
+5. Gazebo and understanding of **SDF** & **URDF** files
 6. Rviz
 7. Understanding of ROS service, client, publisher and subscriber nodes
 8. Understanding of Robotics at fundamental level
 9. Understanding of image processing at fundamental level
 
 ### How to use
-
+1. Set up the robot: Learn how to build customized robot model in Gazebo simulation environment using **Model Editor**
++ Create the URDF File
 
 ### Directory Structure
-
+```bash
+.Project1_Build_My_World
+├── catkin_ws
+│   ├── build
+│   │   ├── ...
+│   ├── devel
+│   │   ├── ...
+│   ├── src
+│   │   ├── ball_chaser
+│   │   │   ├── launch
+│   │   │   │   ├── ball_chaser.launch
+│   │   │   ├── src
+│   │   │   │   ├── drive_bot.cpp
+│   │   │   │   ├── process_image.cpp
+│   │   │   ├── srv
+│   │   │   │   ├── DriveToTarget.srv
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── my_robot
+│   │   │   ├── launch
+│   │   │   │   ├── robot_description.launch
+│   │   │   │   ├── world.launch
+│   │   │   ├── meshes
+│   │   │   │   ├── hokuyo.dae
+│   │   │   ├── rviz
+│   │   │   │   ├── ballChaserRviz.rviz
+│   │   │   ├── urdf
+│   │   │   │   ├── my_robot.gazebo
+│   │   │   │   ├── my_robot.xacro
+│   │   │   ├── worlds
+│   │   │   │   ├── MyOfficeWorld.world
+│   │   │   │   ├── empty.world
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+└── Readme.md
+```
 
 ### Implementation
 
