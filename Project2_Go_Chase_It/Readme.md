@@ -8,6 +8,7 @@ This project introduces the student to write ROS Nodes in C++ and explore the va
 + **drive_bot.cpp** - provides a service to navigate the robot through the world environment
 + **process_image.cpp** - subscribes to the camera image, searches and detects a white ball in the robot's field of view. When the ball's position is identified, this node will send a request to the service provided by _drive_bot.cpp_ node which will in turn direct the robot towards the white ball.
 
+
 ## Table of Contents
 
    * [Requirements](#requirements)
@@ -18,16 +19,31 @@ This project introduces the student to write ROS Nodes in C++ and explore the va
    * [License](#license)
    * [Contribution](#contribution)
 
+
 ### Requirements
+1. Linux OS or a Virtual Machine for Windows/Mac OS
+2. Github
+3. C++
+4. ROS kinetic version
+5. Gazebo
+6. Rviz
+7. Understanding of ROS service, client, publisher and subscriber nodes
+8. Understanding of Robotics at fundamental level
+9. Understanding of image processing at fundamental level
 
 ### How to use
 
+
 ### Directory Structure
+
 
 ### Implementation
 
+
 ### Future Work
 
+
 ### License
+
 
 ### Contribution
