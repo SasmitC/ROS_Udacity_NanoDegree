@@ -8,3 +8,5 @@
 *.stamp
 *.lisp
 *.c
+*Makefile
+*.xml
