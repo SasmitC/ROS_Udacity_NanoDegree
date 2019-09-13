@@ -58,7 +58,7 @@ $ rosdep -i install turtlebot_gazebo
 $ catkin_make
 $ source devel/setup.bash
 ```
-+ Launch Nodes - 
++ Launch Node - 
 ```sh
 $ roslaunch turtlebot_gazebo turtlebot_world.launch
 ```
@@ -69,7 +69,7 @@ Or
 $ rosrun rqt_graph rqt_graph
 ```
 
-2. Clone, build and launch the ```robot_pose_ekf``` package:
+3. Clone, build and launch the ```robot_pose_ekf``` package:
 + Install the package -
 ```sh
 $ cd ~/catkin_ws/src/
@@ -94,6 +94,221 @@ $ git clone http://wiki.ros.org/robot_pose_ekf
 
 </launch>
 ```
++ Next, build the package -
+```sh
+$ cd ~/catkin_ws
+$ catkin_make
+$ source devel/setup.bash
+```
++ Now, after the package is installed and built, launch it using -
+```sh
+$ roslaunch robot_pose_ekf robot_pose_ekf.launch
+```
++ A common practice is to visualize the topics by entering the following in the terminal window -
+```sh
+$ rosrun rqt_graph rqt_graph
+```
+
+![rqt_graph1](rqt-graph-.png)
+
+
+4. Clone, build and launch the ```odom_to_trajectory``` package:
++ Install the package -
+```sh
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/udacity/odom_to_trajectory
+```
++ Build the package -
+```sh
+$ cd ~/catkin_ws
+$ catkin_make
+$ source devel/setup.bash
+```
++ Launch the node -
+```sh
+$ roslaunch odom_to_trajectory create_trajectory.launch 
+```
++ Visualize the topics -
+```sh
+$ rosrun rqt_graph rqt_graph
+```
+
+![rqt_graph2](rqt-graph2.png)
+
+5. Clone, install dependencies, build and launch the ```turtlebot_teleop``` package:
++ Clone the package. To know more visit [this link](http://wiki.ros.org/turtlebot_teleop) -
+```sh
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/turtlebot/turtlebot
+```
+
++ Install the package -
+```sh
+$ cd ~/catkin_ws
+$ source devel/setup.bash
+$ rosdep -i install turtlebot_teleop
+```
++ Build the package -
+```sh
+$ catkin_make
+$ source devel/setup.bash
+```
++ Launch the node -
+```sh
+$ roslaunch turtlebot_teleop keyboard_teleop.launch 
+```
+
+6. Edit and launch ```rviz``` package:
++ Launch ```rviz``` -
+```sh
+$ rosrun rviz rviz
+```
++ Edit the rviz configuration -
+- Change the Fixed Frame to ```base_footprint```
+- Change the Reference Frame to ```odom```
+- Add a ```RobotModel```
+- Add a ```camera``` and select the ```/camera/rgb/image_raw``` topic
+- Add a ```/ekfpath``` topic and change the display name to ```EKFPath```
+- Add a ```/odompath``` topic and change the display name to ```OdomPath```
+- Change the ```OdomPath``` color to ```red:255;0;0```
+
++ Save the rviz configuration in ~/catkin_ws/src as ```EKFLab.rviz```
+
++ Now, kill the rviz terminal!
+
++ Add the following in the **RvizLaunch.launch** file -
+```xml
+<launch>
+  <!--RVIZ-->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/workspace/catkin_ws/src/EKFLab.rviz"/>
+</launch>
+```
++ Launch ```RvizLaunch.launch``` -
+```sh
+$ cd ~/catkin_ws/src
+$ roslaunch RvizLaunch.launch
+```
+
+7. The ```main package```:
+
+![main-launch.png](main-launch.png)
+
++ Create a main package -
+```sh
+$ cd ~/catkin_ws/src
+$ catkin_create_pkg main
+```
+
++ Build the package -
+```sh
+$ cd ~/catkin_ws
+$ catkin_make
+```
++ Create and edit the main.launch file -
+```sh
+$ cd ~/catkin_ws/src/main
+$ mkdir launch
+$ cd launch 
+$ gedit main.launch
+```
++ Add the following to the ```main.launch``` -
+```xml
+<launch>
+  
+  <!--Robot Pose EKF Package -->
+  <!-- The path_ekf_plotter node -->	
+  <node name="path_ekf_plotter" type="path_ekf_plotter.py" pkg="odom_to_trajectory">
+  </node>
+  
+  <!-- The path_odom_plotter node -->
+  <node name="path_odom_plotter" type="path_odom_plotter.py" pkg="odom_to_trajectory">
+  
+  <!--RobotPose EKF package-->
+  </node>
+  <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
+  <param name="output_frame" value="odom_combined"/>
+  <param name="base_footprint_frame" value="base_footprint"/>
+  <param name="freq" value="30.0"/>
+  <param name="sensor_timeout" value="1.0"/>  
+  <param name="odom_used" value="true"/>
+  <param name="imu_used" value="true"/>
+  <param name="vo_used" value="false"/>
+  <remap from="imu_data" to="/mobile_base/sensors/imu_data" />	
+  </node>
+
+  <!-- TurleBot Gazzebo-->
+  <arg name="world_file"  default="$(env TURTLEBOT_GAZEBO_WORLD_FILE)"/>
+
+  <arg name="base"      value="$(optenv TURTLEBOT_BASE kobuki)"/> <!-- create, roomba -->
+  <arg name="battery"   value="$(optenv TURTLEBOT_BATTERY /proc/acpi/battery/BAT0)"/>  <!-- /proc/acpi/battery/BAT0 --> 
+  <arg name="gui" default="true"/>
+  <arg name="stacks"    value="$(optenv TURTLEBOT_STACKS hexagons)"/>  <!-- circles, hexagons --> 
+  <arg name="3d_sensor" value="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro --> 
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="world_name" value="$(arg world_file)"/>
+  </include>
+  
+  <include file="$(find turtlebot_gazebo)/launch/includes/$(arg base).launch.xml">
+    <arg name="base" value="$(arg base)"/>
+    <arg name="stacks" value="$(arg stacks)"/>
+    <arg name="3d_sensor" value="$(arg 3d_sensor)"/>
+  </include>
+  
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+  
+  <!-- Fake laser -->
+  <node pkg="nodelet" type="nodelet" name="laserscan_nodelet_manager" args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="depthimage_to_laserscan"
+        args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet laserscan_nodelet_manager">
+    <param name="scan_height" value="10"/>
+    <param name="output_frame_id" value="/camera_depth_frame"/>
+    <param name="range_min" value="0.45"/>
+    <remap from="image" to="/camera/depth/image_raw"/>
+    <remap from="scan" to="/scan"/>
+  </node>
+
+  <!--RVIZ-->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/workspace/catkin_ws/src/EKFLab.rviz"/>
+  <!--Use this insted if you are cloning the whole repo in your src-->
+  <!--<node pkg="rviz" type="rviz" name="rviz" args="-d /home/workspace/catkin_ws/src/RoboND-EKFLab/EKFLab.rviz"/>-->
+
+  <!--Turtlebot Teleop-->
+  <node pkg="turtlebot_teleop" type="turtlebot_teleop_key" name="turtlebot_teleop_keyboard"  output="screen">
+    <param name="scale_linear" value="0.5" type="double"/>
+    <param name="scale_angular" value="1.5" type="double"/>
+    <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel_mux/input/teleop"/>
+  </node>
+
+
+</launch>
+```
++ Launch the ```main.launch``` file
+```sh
+$ cd ~/catkin_ws/
+$ source devel/setup.bash
+$ roslaunch main main.launch
+```
+
+8. Instructions for Installing and Running the ```rqt_multiplot``` ROS plugin: Refer [this link](https://github.com/ANYbotics/rqt_multiplot_plugin) for ROS plugin documentation.
+
++ Open a new terminal and install the ```rqt_multiplot``` -
+```sh
+$ apt-get install ros-kinetic-rqt -y
+$ apt-get install ros-kinetic-rqt-multiplot -y
+$ apt-get install libqwt-dev -y
+$ rm -rf ~/.config/ros.org/rqt_gui.ini
+```
++ Run the ```rqt_plot``` package node -
+```sh
+$ rosrun rqt_multiplot rqt_multiplot
+```
+![turtlebotOutcome](turtlebotOutcome.png)
 
 
 ### Directory Structure
