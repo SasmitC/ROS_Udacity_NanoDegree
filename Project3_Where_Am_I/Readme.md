@@ -634,7 +634,24 @@ $ ./mcl_app
 
 ### Directory Structure
 
-### Implementation
+### Project Overview, Setup Instructions and Implementation of the project
+This project utilizes the ROS AMCL package in order to accurately localize a mobile robot inside a map in the Gazebo simulation environment. It can be divided into several tasks such as -
+
++ To create a ROS package that launches a custom robot model in a custom Gazebo world
+
++ To utilize the ROS AMCL package and the Tele-Operation / Navigation Stack for localization of the robot
+
++ To Explore, add, and tune specific parameters corresponding to each package to achieve the best possible localization results
+
+Before moving on with the instructions, it is necessary to install the following packages as well -
+```sh
+$ sudo apt-get install ros-kinetic-navigation
+$ sudo apt-get install ros-kinetic-map-server
+$ sudo apt-get install ros-kinetic-move-base
+$ sudo apt-get install ros-kinetic-amcl
+```
+
+1. 
 
 ### Future Work
 
