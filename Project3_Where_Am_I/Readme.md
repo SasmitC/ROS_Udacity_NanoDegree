@@ -13,7 +13,7 @@ Next, the project implements the Monte Carlo Localization (MCL) algorithm for lo
    * [Requirements](#requirements)
    * [How to use](#how-to-use)
    * [Directory Structure](#directory-structure)
-   * [Project Overview, Setup Instructions and Implementation of the project](#implementation)
+   * [Project Overview, Setup Instructions and Implementation of the project](#Project-Overview-,-Setup-Instructions-and-Implementation-of-the-project)
    * [Future Work](#future-work)
    * [License](#license)
    * [Contribution](#contribution)
@@ -652,95 +652,95 @@ $ sudo apt-get install ros-kinetic-amcl
 ```
 
 1. Simulation Setup:
-+ Grab the code from the ![previous project](https://github.com/SasmitC/ROS_Udacity_NanoDegree/tree/master/Project2_Go_Chase_It/catkin_ws/src/my_robot). Create a catkin package by the same name my_robot and copy the contents of above repository into the newly created package on your local machine.
+    + Grab the code from the ![previous project](https://github.com/SasmitC/ROS_Udacity_NanoDegree/tree/master/Project2_Go_Chase_It/catkin_ws/src/my_robot). Create a catkin package by the same name my_robot and copy the contents of above repository into the newly created package on your local machine.
 
-+ Do a quick ```$catkin_make``` and ```$source the devel/setup.bash``` script. Launch the world to verify if the system is good to go!
+    + Do a quick ```$catkin_make``` and ```$source the devel/setup.bash``` script. Launch the world to verify if the system is good to go!
 ```sh
 $ roslaunch my_robot world.launch
 ```
 
 2. Map Setup:
-+ Now that the simulation environment is ready, let us generate a map of it so that the robot knows what to expect when its positioned inside the environment. In reality, engineers utilize Mapping tools to measure and map the area that the robot will be operating in. However, for simplicity, a simulated environment saves us from the going deeper into the advanced mapping challenges. It is possible to generate the map of any simulated world by directly using the ROS package - [pgm_map_creator](https://github.com/udacity/pgm_map_creator).
+    + Now that the simulation environment is ready, let us generate a map of it so that the robot knows what to expect when its positioned inside the environment. In reality, engineers utilize Mapping tools to measure and map the area that the robot will be operating in. However, for simplicity, a simulated environment saves us from the going deeper into the advanced mapping challenges. It is possible to generate the map of any simulated world by directly using the ROS package - [pgm_map_creator](https://github.com/udacity/pgm_map_creator).
 
-+ The map that ROS AMCL Package uses is a pgm file. A pgm file is a grayscale image file. For more information about pgm file or more generally, pnm file, please refer to [Netpbm format Wiki Page](https://en.wikipedia.org/wiki/Netpbm_format).
+    + The map that ROS AMCL Package uses is a pgm file. A pgm file is a grayscale image file. For more information about pgm file or more generally, pnm file, please refer to [Netpbm format Wiki Page](https://en.wikipedia.org/wiki/Netpbm_format).
 
-+ By default, AMCL package will treat 'darker' pixels as obstacle in the pgm map file, and 'lighter' pixels as free space. The threshold could be set as a parameter which we will cover when we are building the launch file.
+    + By default, AMCL package will treat 'darker' pixels as obstacle in the pgm map file, and 'lighter' pixels as free space. The threshold could be set as a parameter which we will cover when we are building the launch file.
 
-+ Navigate to your ROS package folder and create a maps folder. That's where your map file will reside.
-```sh
-$ cd ~/catkin_ws/src/my_robot
-$ mkdir maps
-```
+    + Navigate to your ROS package folder and create a maps folder. That's where your map file will reside.
+    ```sh
+    $ cd ~/catkin_ws/src/my_robot
+    $ mkdir maps
+    ``` 
 
-+ Install dependencies in order to compile the map creator - 
-```sh
-$ sudo apt-get install libignition-math2-dev protobuf-compiler
-```
+    + Install dependencies in order to compile the map creator - 
+    ```sh
+    $ sudo apt-get install libignition-math2-dev protobuf-compiler
+    ```
 
-+ Clone the the package ```pgm_map_creator``` to your ```src``` folder -
-```sh
-$ cd ~/catkin_ws/src/
-$ git clone https://github.com/udacity/pgm_map_creator.git
-```
+    + Clone the the package ```pgm_map_creator``` to your ```src``` folder -
+    ```sh
+    $ cd ~/catkin_ws/src/
+    $ git clone https://github.com/udacity/pgm_map_creator.git
+    ```
 
-+ Build the package -
-```sh
-$ cd ..
-$ catkin_make
-```
+    + Build the package -
+    ```sh
+    $ cd ..
+    $ catkin_make
+    ```
 
-+ Add and edit the world file -
-- Copy the Gazebo world from previous project to the world folder recently created.
-```sh
-$ cp ~/catkin_ws/src/my_robot/worlds/MyOfficeWorld.world ~/catkin_ws/src/pgm_map_creator/world/MyOfficeWorld.world
-```
-- Insert the map creator plugin to your map file. Open the map file using the editor of your choice. Add the following tag towards the end of the file, but just before ```</world>``` tag
-```xml
-<plugin filename="libcollision_map_creator.so" name="collision_map_creator"/>
-```
+    + Add and edit the world file -
+        - Copy the Gazebo world from previous project to the world folder recently created.
+        ```sh
+        $ cp ~/catkin_ws/src/my_robot/worlds/MyOfficeWorld.world ~/catkin_ws/src/pgm_map_creator/world/MyOfficeWorld.world
+        ```
+        - Insert the map creator plugin to your map file. Open the map file using the editor of your choice. Add the following tag towards the end of the file, but just before ```</world>``` tag
+        ```xml
+        <plugin filename="libcollision_map_creator.so" name="collision_map_creator"/>
+        ```
 
-+ Create the pgm map -
-- Open a terminal, run the gzserver with the map file
-```sh
-$ gzserver src/pgm_map_creator/world/MyOfficeWorld.world
-```
-- Open another terminal and launch the request_publisher node
-```sh
-$ roslaunch pgm_map_creator request_publisher.launch
-```
-- Wait for the plugin to generate the map. It will be located in the map folder of the ```pgm_map_creator```!
-- Open it to do a quick check of the map. If the map is cropped, you might want to adjust the parameters in ```launch/request_publisher.launch```, namely the ```x``` and ```y``` values, which defines the size of the map.
-```xml
-  <arg name="xmin" default="-15" />
-  <arg name="xmax" default="15" />
-  <arg name="ymin" default="-15" />
-  <arg name="ymax" default="15" />
-  <arg name="scan_height" default="5" />
-  <arg name="resolution" default="0.01" />
-```
+    + Create the pgm map -
+        - Open a terminal, run the gzserver with the map file
+        ```sh
+        $ gzserver src/pgm_map_creator/world/MyOfficeWorld.world
+        ```
+        - Open another terminal and launch the request_publisher node
+        ```sh
+        $ roslaunch pgm_map_creator request_publisher.launch
+        ```
+        - Wait for the plugin to generate the map. It will be located in the map folder of the ```pgm_map_creator```!
+        - Open it to do a quick check of the map. If the map is cropped, you might want to adjust the parameters in ```launch/request_publisher.launch```, namely the ```x``` and ```y``` values, which defines the size of the map.
+        ```xml
+          <arg name="xmin" default="-15" />
+          <arg name="xmax" default="15" />
+          <arg name="ymin" default="-15" />
+          <arg name="ymax" default="15" />
+          <arg name="scan_height" default="5" />
+          <arg name="resolution" default="0.01" />
+        ```
 
-+ Edit the map -
-Since the map is nothing but an image, you can use image processing softwares like ```gimp``` in Linux to edit the generated map file ```map.pgm``` directly! If the generated ```map.pgm``` is rotated compared to the actual world file view, rotate the image using the above software to match it perfectly with the original orientation of the ```MyOfficeWorld.world``` file.
-- Add the generated map to your package -
-```sh 
-$ cd ~/catkin_ws/
-$ cp src/pgm_map_creator/maps/map.pgm  src/my_robot/maps/map.pgm
-```
-- It is necessary to create a ```yaml``` file besides the ```map.pgm``` file -
-```sh 
-$ cd src/my_robot/src/maps
-$ touch map.yaml
-```
-- Open the yaml file and add the following lines to it -
-```yaml
-image: map.pgm
-resolution: 0.01
-origin: [-15.0, -15.0, 0.0]
-occupied_thresh: 0.65
-free_thresh: 0.196
-negate: 0
-```
-Note that the origin of the map should correspond to your map's size. For example, the default map size is 30 by 30, so the origin will be [-15, -15, 0], i.e. half the size of the map.
+    + Edit the map -
+        Since the map is nothing but an image, you can use image processing softwares like ```gimp``` in Linux to edit the generated map file ```map.pgm``` directly! If the generated ```map.pgm``` is rotated compared to the actual world file view, rotate the image using the above software to match it perfectly with the original orientation of the ```MyOfficeWorld.world``` file.
+        - Add the generated map to your package -
+        ```sh 
+        $ cd ~/catkin_ws/
+        $ cp src/pgm_map_creator/maps/map.pgm  src/my_robot/maps/map.pgm
+        ```
+        - It is necessary to create a ```yaml``` file besides the ```map.pgm``` file -
+        ```sh 
+        $ cd src/my_robot/src/maps
+        $ touch map.yaml
+        ```
+        - Open the yaml file and add the following lines to it -
+        ```yaml
+        image: map.pgm
+        resolution: 0.01
+        origin: [-15.0, -15.0, 0.0]
+        occupied_thresh: 0.65
+        free_thresh: 0.196
+        negate: 0
+        ```
+        Note that the origin of the map should correspond to your map's size. For example, the default map size is 30 by 30, so the origin will be [-15, -15, 0], i.e. half the size of the map.
 
 3. AML Package:
 
