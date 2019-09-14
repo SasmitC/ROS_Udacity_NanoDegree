@@ -234,7 +234,7 @@ angular_z: 0.0"  # This request should bring your robot to a complete stop
 </launch>
 ```
 
-13. Model the white ball:
+14. Model the white ball:
 + Open Gazebo simulation -
 ```sh
 $ gazebo # then Edit-> Model Editor
@@ -245,7 +245,7 @@ $ gazebo # then Edit-> Model Editor
 + Insert the newly created white ball in the Gazebo world, place it outside the arena randomly and then launch ```MyOfficeWorld.world``` again 
 + Save this configuration as the new ```MyOfficeWorld.world``` with the white ball under ```~/catkin_ws/src/my_robot/worlds``` directory
 
-14. Create ```process_image.cpp``` ROS node:
+15. Create ```process_image.cpp``` ROS node:
 This node will analyze the image and request services to drive the robot towards the white ball.
 + Edit CMakeLists.txt:
 In addition to all the dependencies you added earlier for ```drive_bot.cpp```, these are the dependencies that you should add for ```process_image.cpp``` -
@@ -272,7 +272,7 @@ $ source devel/setup.bash
 $ roslaunch ball_chaser ball_chaser.launch
 ```
 
-15. Visualize: To visualize the robot’s camera images, you can subscribe to camera RGB image topic from RViz. Or you can run the rqt_image_view node -
+16. Visualize: To visualize the robot’s camera images, you can subscribe to camera RGB image topic from RViz. Or you can run the rqt_image_view node -
 ```sh
 $ cd /~/catkin_ws/
 $ source devel/setup.bash
