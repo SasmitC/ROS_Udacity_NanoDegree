@@ -5,7 +5,7 @@ This repository comprises of the projects one needs to work on while pursuing th
 
 My accomplishment:
 
-[UdacityCertificate](UdacityNanoDegree_Chavan_Sasmit.pdf)
+![UdacityCertificate](UdacityNanoDegree_Chavan_Sasmit.pdf)
 
 Click on the image below to learn more about the program from the makers of this course! 
 
