@@ -9,4 +9,8 @@
 *.lisp
 *.c
 *Makefile
-*.xml
+*.dae
+*.l
+*.asd
+*.js
+*.ini
