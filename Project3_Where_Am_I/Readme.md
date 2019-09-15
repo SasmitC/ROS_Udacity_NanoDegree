@@ -668,25 +668,26 @@ $ catkin_make
 │   │   │   ├── package.xml
 │   │   ├── pgm_map_creator
 │   │   │   ├── launch
-│   │   │   │   ├── ball_chaser.launch
+│   │   │   │   ├── request_publisher.launch
+│   │   │   ├── maps
+│   │   │   │   ├── map.pgm
+│   │   │   ├── msgs
+│   │   │   │   ├── collision_map_request.proto
+│   │   │   │   ├── CMakeLists.txt
 │   │   │   ├── src
-│   │   │   │   ├── drive_bot.cpp
-│   │   │   │   ├── process_image.cpp
-│   │   │   ├── srv
-│   │   │   │   ├── DriveToTarget.srv
+│   │   │   │   ├── collision_map_creator.cc
+│   │   │   │   ├── request_publisher.cc
+│   │   │   ├── world
+│   │   │   │   ├── MyOfficeWorld.world
+│   │   │   ├── README.md
+│   │   │   ├── LICENSE
 │   │   │   ├── CMakeLists.txt
 │   │   │   ├── package.xml
 │   │   ├── teleop_twist_keyboard
-│   │   │   ├── launch
-│   │   │   │   ├── ball_chaser.launch
-│   │   │   ├── src
-│   │   │   │   ├── drive_bot.cpp
-│   │   │   │   ├── process_image.cpp
-│   │   │   ├── srv
-│   │   │   │   ├── DriveToTarget.srv
+│   │   │   ├── teleop_twist_keyboard.py
+│   │   │   ├── README.md
 │   │   │   ├── CMakeLists.txt
 │   │   │   ├── package.xml
-│   ├── Screenshots
 └── Readme.md
 ```
 
