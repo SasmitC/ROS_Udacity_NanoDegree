@@ -13,7 +13,7 @@ Next, the project implements the Monte Carlo Localization (MCL) algorithm for lo
    * [Requirements](#requirements)
    * [How to use](#how-to-use)
    * [Directory Structure](#directory-structure)
-   * [Project Overview, Setup Instructions and Implementation of the project](#Project-Overview-,-Setup-Instructions-and-Implementation-of-the-project)
+   * [Project Overview, Setup Instructions and Implementation of the project](#project-overview,-setup-instructions-and-implementation-of-the-project)
    * [Future Work](#future-work)
    * [License](#license)
    * [Contribution](#contribution)
@@ -42,307 +42,306 @@ $ catkin_make
 ```
 
 2. Clone, build and launch the ```turtlebot_gazebo``` package:
-+ Clone the ```turtlebot_gazebo``` package in to the ```src``` directory created in step #1. Go through [this link](http://wiki.ros.org/turtlebot_gazebo) and its tutorials to get familiar with the package -
-```sh
-$ cd ~/catkin_ws/src
-$ git clone https://github.com/turtlebot/turtlebot_simulator
-```
-+ Install Dependencies -
-```sh
-$ cd ~/catkin_ws
-$ source devel/setup.bash
-$ rosdep -i install turtlebot_gazebo
-```
-+ Build Package -
-```sh
-$ catkin_make
-$ source devel/setup.bash
-```
-+ Launch Node - 
-```sh
-$ roslaunch turtlebot_gazebo turtlebot_world.launch
-```
-+ Topics -
-```sh
-$ rostopic list
-Or
-$ rosrun rqt_graph rqt_graph
-```
+    + Clone the ```turtlebot_gazebo``` package in to the ```src``` directory created in step #1. Go through [this link](http://wiki.ros.org/turtlebot_gazebo) and its tutorials to get familiar with the package -
+    ```sh
+    $ cd ~/catkin_ws/src
+    $ git clone https://github.com/turtlebot/turtlebot_simulator
+    ```
+    + Install Dependencies -
+    ```sh
+    $ cd ~/catkin_ws
+    $ source devel/setup.bash
+    $ rosdep -i install turtlebot_gazebo
+    ```
+    + Build Package -
+    ```sh
+    $ catkin_make
+    $ source devel/setup.bash
+    ```
+    + Launch Node - 
+    ```sh
+    $ roslaunch turtlebot_gazebo turtlebot_world.launch
+    ```
+    + Topics -
+    ```sh
+    $ rostopic list
+    Or
+    $ rosrun rqt_graph rqt_graph
+    ```
 
 3. Clone, build and launch the ```robot_pose_ekf``` package:
-+ Install the package -
-```sh
-$ cd ~/catkin_ws/src/
-$ git clone http://wiki.ros.org/robot_pose_ekf
-```
-+ Edit the ```robot_pose_ekf.launch``` file as below -
-```xml
-<launch>
+    + Install the package -
+    ```sh
+    $ cd ~/catkin_ws/src/
+    $ git clone http://wiki.ros.org/robot_pose_ekf
+    ```
+    + Edit the ```robot_pose_ekf.launch``` file as below -
+    ```xml
+    <launch>
 
-<node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
-  <param name="output_frame" value="odom_combined"/>
-  <param name="base_footprint_frame" value="base_footprint"/>
-  <param name="freq" value="30.0"/>
-  <param name="sensor_timeout" value="1.0"/>  
-  <param name="odom_used" value="true"/>
-  <param name="imu_used" value="true"/>
-  <param name="vo_used" value="false"/>
+      <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
+        <param name="output_frame" value="odom_combined"/>
+        <param name="base_footprint_frame" value="base_footprint"/>
+        <param name="freq" value="30.0"/>
+        <param name="sensor_timeout" value="1.0"/>  
+        <param name="odom_used" value="true"/>
+        <param name="imu_used" value="true"/>
+        <param name="vo_used" value="false"/>
 
-  <remap from="imu_data" to="/mobile_base/sensors/imu_data" />    
+        <remap from="imu_data" to="/mobile_base/sensors/imu_data" />    
 
-</node>
+      </node>
 
-</launch>
-```
-+ Next, build the package -
-```sh
-$ cd ~/catkin_ws
-$ catkin_make
-$ source devel/setup.bash
-```
-+ Now, after the package is installed and built, launch it using -
-```sh
-$ roslaunch robot_pose_ekf robot_pose_ekf.launch
-```
-+ A common practice is to visualize the topics by entering the following in the terminal window -
-```sh
-$ rosrun rqt_graph rqt_graph
-```
+    </launch>
+    ```
+    + Next, build the package -
+    ```sh
+    $ cd ~/catkin_ws
+    $ catkin_make
+    $ source devel/setup.bash
+    ```
+    + Now, after the package is installed and built, launch it using -
+    ```sh
+    $ roslaunch robot_pose_ekf robot_pose_ekf.launch
+    ```
+    + A common practice is to visualize the topics by entering the following in the terminal window -
+    ```sh
+    $ rosrun rqt_graph rqt_graph
+    ```
 
-![rqt_graph1](rqt-graph-.png)
+    ![rqt_graph1](rqt-graph-.png)
 
 
 4. Clone, build and launch the ```odom_to_trajectory``` package:
-+ Install the package -
-```sh
-$ cd ~/catkin_ws/src
-$ git clone https://github.com/udacity/odom_to_trajectory
-```
-+ Build the package -
-```sh
-$ cd ~/catkin_ws
-$ catkin_make
-$ source devel/setup.bash
-```
-+ Launch the node -
-```sh
-$ roslaunch odom_to_trajectory create_trajectory.launch 
-```
-+ Visualize the topics -
-```sh
-$ rosrun rqt_graph rqt_graph
-```
+    + Install the package -
+    ```sh
+    $ cd ~/catkin_ws/src
+    $ git clone https://github.com/udacity/odom_to_trajectory
+    ```
+    + Build the package -
+    ```sh
+    $ cd ~/catkin_ws
+    $ catkin_make
+    $ source devel/setup.bash
+    ```
+    + Launch the node -
+    ```sh
+    $ roslaunch odom_to_trajectory create_trajectory.launch 
+    ```
+    + Visualize the topics -
+    ```sh
+    $ rosrun rqt_graph rqt_graph
+    ```
 
-![rqt_graph2](rqt-graph2.png)
+    ![rqt_graph2](rqt-graph2.png)
 
 5. Clone, install dependencies, build and launch the ```turtlebot_teleop``` package:
-+ Clone the package. To know more visit [this link](http://wiki.ros.org/turtlebot_teleop) -
-```sh
-$ cd ~/catkin_ws/src
-$ git clone https://github.com/turtlebot/turtlebot
-```
+    + Clone the package. To know more visit [this link](http://wiki.ros.org/turtlebot_teleop) -
+    ```sh
+    $ cd ~/catkin_ws/src
+    $ git clone https://github.com/turtlebot/turtlebot
+    ```
 
-+ Install the package -
-```sh
-$ cd ~/catkin_ws
-$ source devel/setup.bash
-$ rosdep -i install turtlebot_teleop
-```
-+ Build the package -
-```sh
-$ catkin_make
-$ source devel/setup.bash
-```
-+ Launch the node -
-```sh
-$ roslaunch turtlebot_teleop keyboard_teleop.launch 
-```
+    + Install the package -
+    ```sh
+    $ cd ~/catkin_ws
+    $ source devel/setup.bash
+    $ rosdep -i install turtlebot_teleop
+    ```
+    + Build the package -
+    ```sh
+    $ catkin_make
+    $ source devel/setup.bash
+    ```
+    + Launch the node -
+    ```sh
+    $ roslaunch turtlebot_teleop keyboard_teleop.launch 
+    ```
 
 6. Edit and launch ```rviz``` package:
-+ Launch ```rviz``` -
-```sh
-$ rosrun rviz rviz
-```
-+ Edit the rviz configuration -
-- Change the Fixed Frame to ```base_footprint```
-- Change the Reference Frame to ```odom```
-- Add a ```RobotModel```
-- Add a ```camera``` and select the ```/camera/rgb/image_raw``` topic
-- Add a ```/ekfpath``` topic and change the display name to ```EKFPath```
-- Add a ```/odompath``` topic and change the display name to ```OdomPath```
-- Change the ```OdomPath``` color to ```red:255;0;0```
+    + Launch ```rviz``` -
+    ```sh
+    $ rosrun rviz rviz
+    ```
+    + Edit the rviz configuration -
+        - Change the Fixed Frame to ```base_footprint```
+        - Change the Reference Frame to ```odom```
+        - Add a ```RobotModel```
+        - Add a ```camera``` and select the ```/camera/rgb/image_raw``` topic
+        - Add a ```/ekfpath``` topic and change the display name to ```EKFPath```
+        - Add a ```/odompath``` topic and change the display name to ```OdomPath```
+        - Change the ```OdomPath``` color to ```red:255;0;0```
 
-+ Save the rviz configuration in ~/catkin_ws/src as ```EKFLab.rviz```
+    + Save the rviz configuration in ~/catkin_ws/src as ```EKFLab.rviz```
 
-+ Now, kill the rviz terminal!
+    + Now, kill the rviz terminal!
 
-+ Add the following in the **RvizLaunch.launch** file -
-```xml
-<launch>
-  <!--RVIZ-->
-  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/workspace/catkin_ws/src/EKFLab.rviz"/>
-</launch>
-```
-+ Launch ```RvizLaunch.launch``` -
-```sh
-$ cd ~/catkin_ws/src
-$ roslaunch RvizLaunch.launch
-```
+    + Add the following in the **RvizLaunch.launch** file -
+    ```xml
+    <launch>
+      <!--RVIZ-->
+      <node pkg="rviz" type="rviz" name="rviz" args="-d /home/workspace/catkin_ws/src/EKFLab.rviz"/>
+    </launch>
+    ```
+    + Launch ```RvizLaunch.launch``` -
+    ```sh
+    $ cd ~/catkin_ws/src
+    $ roslaunch RvizLaunch.launch
+    ```
 
 7. The ```main package```:
 
-![main-launch.png](main-launch.png)
+    ![main-launch.png](main-launch.png)
 
-+ Create a main package -
-```sh
-$ cd ~/catkin_ws/src
-$ catkin_create_pkg main
-```
+    + Create a main package -
+    ```sh
+    $ cd ~/catkin_ws/src
+    $ catkin_create_pkg main
+    ```
 
-+ Build the package -
-```sh
-$ cd ~/catkin_ws
-$ catkin_make
-```
-+ Create and edit the main.launch file -
-```sh
-$ cd ~/catkin_ws/src/main
-$ mkdir launch
-$ cd launch 
-$ gedit main.launch
-```
-+ Add the following to the ```main.launch``` -
-```xml
-<launch>
+    + Build the package -
+    ```sh
+    $ cd ~/catkin_ws
+    $ catkin_make
+    ```
+    + Create and edit the main.launch file -
+    ```sh
+    $ cd ~/catkin_ws/src/main
+    $ mkdir launch
+    $ cd launch 
+    $ gedit main.launch
+    ```
+    + Add the following to the ```main.launch``` -
+    ```xml
+    <launch>
   
-  <!--Robot Pose EKF Package -->
-  <!-- The path_ekf_plotter node -->	
-  <node name="path_ekf_plotter" type="path_ekf_plotter.py" pkg="odom_to_trajectory">
-  </node>
+      <!--Robot Pose EKF Package -->
+      <!-- The path_ekf_plotter node -->	
+      <node name="path_ekf_plotter" type="path_ekf_plotter.py" pkg="odom_to_trajectory">
+      </node>
   
-  <!-- The path_odom_plotter node -->
-  <node name="path_odom_plotter" type="path_odom_plotter.py" pkg="odom_to_trajectory">
+      <!-- The path_odom_plotter node -->
+      <node name="path_odom_plotter" type="path_odom_plotter.py" pkg="odom_to_trajectory">
   
-  <!--RobotPose EKF package-->
-  </node>
-  <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
-  <param name="output_frame" value="odom_combined"/>
-  <param name="base_footprint_frame" value="base_footprint"/>
-  <param name="freq" value="30.0"/>
-  <param name="sensor_timeout" value="1.0"/>  
-  <param name="odom_used" value="true"/>
-  <param name="imu_used" value="true"/>
-  <param name="vo_used" value="false"/>
-  <remap from="imu_data" to="/mobile_base/sensors/imu_data" />	
-  </node>
+      <!--RobotPose EKF package-->
+      </node>
+      <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
+        <param name="output_frame" value="odom_combined"/>
+        <param name="base_footprint_frame" value="base_footprint"/>
+        <param name="freq" value="30.0"/>
+        <param name="sensor_timeout" value="1.0"/>  
+        <param name="odom_used" value="true"/>
+        <param name="imu_used" value="true"/>
+        <param name="vo_used" value="false"/>
+        <remap from="imu_data" to="/mobile_base/sensors/imu_data" />	
+      </node>
 
-  <!-- TurleBot Gazzebo-->
-  <arg name="world_file"  default="$(env TURTLEBOT_GAZEBO_WORLD_FILE)"/>
+      <!-- TurleBot Gazzebo-->
+      <arg name="world_file"  default="$(env TURTLEBOT_GAZEBO_WORLD_FILE)"/>
 
-  <arg name="base"      value="$(optenv TURTLEBOT_BASE kobuki)"/> <!-- create, roomba -->
-  <arg name="battery"   value="$(optenv TURTLEBOT_BATTERY /proc/acpi/battery/BAT0)"/>  <!-- /proc/acpi/battery/BAT0 --> 
-  <arg name="gui" default="true"/>
-  <arg name="stacks"    value="$(optenv TURTLEBOT_STACKS hexagons)"/>  <!-- circles, hexagons --> 
-  <arg name="3d_sensor" value="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro --> 
+      <arg name="base"      value="$(optenv TURTLEBOT_BASE kobuki)"/> <!-- create, roomba -->
+      <arg name="battery"   value="$(optenv TURTLEBOT_BATTERY /proc/acpi/battery/BAT0)"/>  <!-- /proc/acpi/battery/BAT0 --> 
+      <arg name="gui" default="true"/>
+      <arg name="stacks"    value="$(optenv TURTLEBOT_STACKS hexagons)"/>  <!-- circles, hexagons --> 
+      <arg name="3d_sensor" value="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro --> 
 
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="use_sim_time" value="true"/>
-    <arg name="debug" value="false"/>
-    <arg name="gui" value="$(arg gui)" />
-    <arg name="world_name" value="$(arg world_file)"/>
-  </include>
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="world_name" value="$(arg world_file)"/>
+      </include>
   
-  <include file="$(find turtlebot_gazebo)/launch/includes/$(arg base).launch.xml">
-    <arg name="base" value="$(arg base)"/>
-    <arg name="stacks" value="$(arg stacks)"/>
-    <arg name="3d_sensor" value="$(arg 3d_sensor)"/>
-  </include>
+      <include file="$(find turtlebot_gazebo)/launch/includes/$(arg base).launch.xml">
+        <arg name="base" value="$(arg base)"/>
+        <arg name="stacks" value="$(arg stacks)"/>
+        <arg name="3d_sensor" value="$(arg 3d_sensor)"/>
+      </include>
   
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-    <param name="publish_frequency" type="double" value="30.0" />
-  </node>
+      <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="30.0" />
+      </node>
   
-  <!-- Fake laser -->
-  <node pkg="nodelet" type="nodelet" name="laserscan_nodelet_manager" args="manager"/>
-  <node pkg="nodelet" type="nodelet" name="depthimage_to_laserscan"
-        args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet laserscan_nodelet_manager">
-    <param name="scan_height" value="10"/>
-    <param name="output_frame_id" value="/camera_depth_frame"/>
-    <param name="range_min" value="0.45"/>
-    <remap from="image" to="/camera/depth/image_raw"/>
-    <remap from="scan" to="/scan"/>
-  </node>
+      <!-- Fake laser -->
+      <node pkg="nodelet" type="nodelet" name="laserscan_nodelet_manager" args="manager"/>
+      <node pkg="nodelet" type="nodelet" name="depthimage_to_laserscan"
+        <args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet laserscan_nodelet_manager">
+        <param name="scan_height" value="10"/>
+        <param name="output_frame_id" value="/camera_depth_frame"/>
+        <param name="range_min" value="0.45"/>
+        <remap from="image" to="/camera/depth/image_raw"/>
+        <remap from="scan" to="/scan"/>
+      </node>
 
-  <!--RVIZ-->
-  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/workspace/catkin_ws/src/EKFLab.rviz"/>
-  <!--Use this insted if you are cloning the whole repo in your src-->
-  <!--<node pkg="rviz" type="rviz" name="rviz" args="-d /home/workspace/catkin_ws/src/RoboND-EKFLab/EKFLab.rviz"/>-->
+      <!--RVIZ-->
+      <node pkg="rviz" type="rviz" name="rviz" args="-d /home/workspace/catkin_ws/src/EKFLab.rviz"/>
+      <!--Use this insted if you are cloning the whole repo in your src-->
+      <!--<node pkg="rviz" type="rviz" name="rviz" args="-d /home/workspace/catkin_ws/src/RoboND-EKFLab/EKFLab.rviz"/>-->
 
-  <!--Turtlebot Teleop-->
-  <node pkg="turtlebot_teleop" type="turtlebot_teleop_key" name="turtlebot_teleop_keyboard"  output="screen">
-    <param name="scale_linear" value="0.5" type="double"/>
-    <param name="scale_angular" value="1.5" type="double"/>
-    <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel_mux/input/teleop"/>
-  </node>
+      <!--Turtlebot Teleop-->
+      <node pkg="turtlebot_teleop" type="turtlebot_teleop_key" name="turtlebot_teleop_keyboard"  output="screen">
+        <param name="scale_linear" value="0.5" type="double"/>
+        <param name="scale_angular" value="1.5" type="double"/>
+        <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel_mux/input/teleop"/>
+      </node>
 
-
-</launch>
-```
-+ Launch the ```main.launch``` file
-```sh
-$ cd ~/catkin_ws/
-$ source devel/setup.bash
-$ roslaunch main main.launch
-```
+    </launch>
+    ```
+    + Launch the ```main.launch``` file
+    ```sh
+    $ cd ~/catkin_ws/
+    $ source devel/setup.bash
+    $ roslaunch main main.launch
+    ```
 
 8. Instructions for Installing and Running the ```rqt_multiplot``` ROS plugin: Refer [this link](https://github.com/ANYbotics/rqt_multiplot_plugin) for ROS plugin documentation.
 
-+ Open a new terminal and install the ```rqt_multiplot``` -
-```sh
-$ apt-get install ros-kinetic-rqt -y
-$ apt-get install ros-kinetic-rqt-multiplot -y
-$ apt-get install libqwt-dev -y
-$ rm -rf ~/.config/ros.org/rqt_gui.ini
-```
-+ Run the ```rqt_plot``` package node -
-```sh
-$ rosrun rqt_multiplot rqt_multiplot
-```
-![turtlebotOutcome](turtlebotOutcome.png)
+    + Open a new terminal and install the ```rqt_multiplot``` -
+    ```sh
+    $ apt-get install ros-kinetic-rqt -y
+    $ apt-get install ros-kinetic-rqt-multiplot -y
+    $ apt-get install libqwt-dev -y
+    $ rm -rf ~/.config/ros.org/rqt_gui.ini
+    ```
+    + Run the ```rqt_plot``` package node -
+    ```sh
+    $ rosrun rqt_multiplot rqt_multiplot
+    ```
+    ![turtlebotOutcome](turtlebotOutcome.png)
 
 9. Code and observe the MCL in action:
-+ Following is the C++ code for Monte Carlo Localization example. Create a mcl.cpp file inside the ```src``` directory and add the following -
-```cpp
-//Compile with: g++ solution.cpp -o app -std=c++11 -I/usr/include/python2.7 -lpython2.7
-#include "src/matplotlibcpp.h" //Graph Library
-#include <iostream>
-#include <string>
-#include <math.h>
-#include <stdexcept> // throw errors
-#include <random> //C++ 11 Random Numbers
-#include <vector>
+    + Following is the C++ code for Monte Carlo Localization example. Create a mcl.cpp file inside the ```src``` directory and add the following -
+    ```cpp
+    //Compile with: g++ solution.cpp -o app -std=c++11 -I/usr/include/python2.7 -lpython2.7
+    #include "src/matplotlibcpp.h" //Graph Library
+    #include <iostream>
+    #include <string>
+    #include <math.h>
+    #include <stdexcept> // throw errors
+    #include <random> //C++ 11 Random Numbers
+    #include <vector>
 
-namespace plt = matplotlibcpp;
-using namespace std;
+    namespace plt = matplotlibcpp;
+    using namespace std;
 
-// Landmarks
-double landmarks[8][2] = { { 20.0, 20.0 }, { 20.0, 80.0 }, { 20.0, 50.0 },
-    { 50.0, 20.0 }, { 50.0, 80.0 }, { 80.0, 80.0 },
-    { 80.0, 20.0 }, { 80.0, 50.0 } };
+    // Landmarks
+    double landmarks[8][2] = { { 20.0, 20.0 }, { 20.0, 80.0 }, { 20.0, 50.0 },
+        { 50.0, 20.0 }, { 50.0, 80.0 }, { 80.0, 80.0 },
+        { 80.0, 20.0 }, { 80.0, 50.0 } };
 
-// Map size in meters
-double world_size = 100.0;
+    // Map size in meters
+    double world_size = 100.0;
 
-// Random Generators
-random_device rd;
-mt19937 gen(rd());
+    // Random Generators
+    random_device rd;
+    mt19937 gen(rd());
 
-// Global Functions
-double mod(double first_term, double second_term);
-double gen_real_random();
+    // Global Functions
+    double mod(double first_term, double second_term);
+    double gen_real_random();
 
-class Robot {
-public:
+    class Robot {
+    public:
     Robot()
     {
         // Constructor
@@ -454,7 +453,7 @@ public:
     double x, y, orient; //robot poses
     double forward_noise, turn_noise, sense_noise; //robot noises
 
-private:
+    private:
     double gen_gauss_random(double mean, double variance)
     {
         // Gaussian random
@@ -467,24 +466,24 @@ private:
         // Probability of x for 1-dim Gaussian with mean mu and var. sigma
         return exp(-(pow((mu - x), 2)) / (pow(sigma, 2)) / 2.0) / sqrt(2.0 * M_PI * (pow(sigma, 2)));
     }
-};
+    };
 
-// Functions
-double gen_real_random()
-{
-    // Generate real random between 0 and 1
-    uniform_real_distribution<double> real_dist(0.0, 1.0); //Real
-    return real_dist(gen);
-}
+    // Functions
+    double gen_real_random()
+    {
+        // Generate real random between 0 and 1
+        uniform_real_distribution<double> real_dist(0.0, 1.0); //Real
+        return real_dist(gen);
+    }
 
-double mod(double first_term, double second_term)
-{
-    // Compute the modulus
-    return first_term - (second_term)*floor(first_term / (second_term));
-}
+    double mod(double first_term, double second_term)
+    {
+        // Compute the modulus
+        return first_term - (second_term)*floor(first_term / (second_term));
+    }
 
-double evaluation(Robot r, Robot p[], int n)
-{
+    double evaluation(Robot r, Robot p[], int n)
+    {
     //Calculate the mean error of the system
     double sum = 0.0;
     for (int i = 0; i < n; i++) {
@@ -495,144 +494,201 @@ double evaluation(Robot r, Robot p[], int n)
         sum += err;
     }
     return sum / n;
-}
-double max(double arr[], int n)
-{
-    // Identify the max element in an array
-    double max = 0;
-    for (int i = 0; i < n; i++) {
-        if (arr[i] > max)
-            max = arr[i];
     }
-    return max;
-}
-
-void visualization(int n, Robot robot, int step, Robot p[], Robot pr[])
-{
-    //Draw the robot, landmarks, particles and resampled particles on a graph
-
-    //Graph Format
-    plt::title("MCL, step " + to_string(step));
-    plt::xlim(0, 100);
-    plt::ylim(0, 100);
-
-    //Draw particles in green
-    for (int i = 0; i < n; i++) {
-        plt::plot({ p[i].x }, { p[i].y }, "go");
-    }
-
-    //Draw resampled particles in yellow
-    for (int i = 0; i < n; i++) {
-        plt::plot({ pr[i].x }, { pr[i].y }, "yo");
-    }
-
-    //Draw landmarks in red
-    for (int i = 0; i < sizeof(landmarks) / sizeof(landmarks[0]); i++) {
-        plt::plot({ landmarks[i][0] }, { landmarks[i][1] }, "ro");
-    }
-
-    //Draw robot position in blue
-    plt::plot({ robot.x }, { robot.y }, "bo");
-
-    //Save the image and close the plot
-    plt::save("./Images/Step" + to_string(step) + ".png");
-    plt::clf();
-}
-
-int main()
-{
-    //Practice Interfacing with Robot Class
-    Robot myrobot;
-    myrobot.set_noise(5.0, 0.1, 5.0);
-    myrobot.set(30.0, 50.0, M_PI / 2.0);
-    myrobot.move(-M_PI / 2.0, 15.0);
-    //cout << myrobot.read_sensors() << endl;
-    myrobot.move(-M_PI / 2.0, 10.0);
-    //cout << myrobot.read_sensors() << endl;
-
-    // Create a set of particles
-    int n = 1000;
-    Robot p[n];
-
-    for (int i = 0; i < n; i++) {
-        p[i].set_noise(0.05, 0.05, 5.0);
-        //cout << p[i].show_pose() << endl;
-    }
-
-    //Re-initialize myrobot object and Initialize a measurment vector
-    myrobot = Robot();
-    vector<double> z;
-
-    //Iterating 50 times over the set of particles
-    int steps = 50;
-    for (int t = 0; t < steps; t++) {
-
-        //Move the robot and sense the environment afterwards
-        myrobot = myrobot.move(0.1, 5.0);
-        z = myrobot.sense();
-
-        // Simulate a robot motion for each of these particles
-        Robot p2[n];
+    
+    double max(double arr[], int n)
+    {
+        // Identify the max element in an array
+        double max = 0;
         for (int i = 0; i < n; i++) {
-            p2[i] = p[i].move(0.1, 5.0);
-            p[i] = p2[i];
+            if (arr[i] > max)
+                max = arr[i];
+        }
+        return max;
+    }
+
+    void visualization(int n, Robot robot, int step, Robot p[], Robot pr[])
+    {
+        //Draw the robot, landmarks, particles and resampled particles on a graph
+
+        //Graph Format
+        plt::title("MCL, step " + to_string(step));
+        plt::xlim(0, 100);
+        plt::ylim(0, 100);
+
+        //Draw particles in green
+        for (int i = 0; i < n; i++) {
+            plt::plot({ p[i].x }, { p[i].y }, "go");
         }
 
-        //Generate particle weights depending on robot's measurement
-        double w[n];
+        //Draw resampled particles in yellow
         for (int i = 0; i < n; i++) {
-            w[i] = p[i].measurement_prob(z);
-            //cout << w[i] << endl;
+            plt::plot({ pr[i].x }, { pr[i].y }, "yo");
         }
 
-        //Resample the particles with a sample probability proportional to the importance weight
-        Robot p3[n];
-        int index = gen_real_random() * n;
-        //cout << index << endl;
-        double beta = 0.0;
-        double mw = max(w, n);
-        //cout << mw;
+        //Draw landmarks in red
+        for (int i = 0; i < sizeof(landmarks) / sizeof(landmarks[0]); i++) {
+            plt::plot({ landmarks[i][0] }, { landmarks[i][1] }, "ro");
+        }
+
+        //Draw robot position in blue
+        plt::plot({ robot.x }, { robot.y }, "bo");
+
+        //Save the image and close the plot
+        plt::save("./Images/Step" + to_string(step) + ".png");
+        plt::clf();
+    }
+
+    int main()
+    {
+        //Practice Interfacing with Robot Class
+        Robot myrobot;
+        myrobot.set_noise(5.0, 0.1, 5.0);
+        myrobot.set(30.0, 50.0, M_PI / 2.0);
+        myrobot.move(-M_PI / 2.0, 15.0);
+        //cout << myrobot.read_sensors() << endl;
+        myrobot.move(-M_PI / 2.0, 10.0);
+        //cout << myrobot.read_sensors() << endl;
+
+        // Create a set of particles
+        int n = 1000;
+        Robot p[n];
+
         for (int i = 0; i < n; i++) {
-            beta += gen_real_random() * 2.0 * mw;
-            while (beta > w[index]) {
-                beta -= w[index];
-                index = mod((index + 1), n);
+            p[i].set_noise(0.05, 0.05, 5.0);
+            //cout << p[i].show_pose() << endl;
+        }
+
+        //Re-initialize myrobot object and Initialize a measurment vector
+        myrobot = Robot();
+        vector<double> z;
+
+        //Iterating 50 times over the set of particles
+        int steps = 50;
+        for (int t = 0; t < steps; t++) {
+
+            //Move the robot and sense the environment afterwards
+             myrobot = myrobot.move(0.1, 5.0);
+            z = myrobot.sense();
+
+            // Simulate a robot motion for each of these particles
+            Robot p2[n];
+            for (int i = 0; i < n; i++) {
+                p2[i] = p[i].move(0.1, 5.0);
+                p[i] = p2[i];
             }
-            p3[i] = p[index];
-        }
-        for (int k = 0; k < n; k++) {
-            p[k] = p3[k];
-            //cout << p[k].show_pose() << endl;
-        }
 
-        //Evaluate the Error
-        cout << "Step = " << t << ", Evaluation = " << evaluation(myrobot, p, n) << endl;
+            //Generate particle weights depending on robot's measurement
+            double w[n];
+            for (int i = 0; i < n; i++) {
+                w[i] = p[i].measurement_prob(z);
+                //cout << w[i] << endl;
+             }
 
-        //####   DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
+            //Resample the particles with a sample probability proportional to the importance weight
+            Robot p3[n];
+            int index = gen_real_random() * n;
+            //cout << index << endl;
+            double beta = 0.0;
+            double mw = max(w, n);
+            //cout << mw;
+            for (int i = 0; i < n; i++) {
+                beta += gen_real_random() * 2.0 * mw;
+                while (beta > w[index]) {
+                    beta -= w[index];
+                    index = mod((index + 1), n);
+                }
+                p3[i] = p[index];
+            }
+            for (int k = 0; k < n; k++) {
+                p[k] = p3[k];
+                //cout << p[k].show_pose() << endl;
+            }
 
-        //Graph the position of the robot and the particles at each step
-        visualization(n, myrobot, t, p2, p3);
+            //Evaluate the Error
+            cout << "Step = " << t << ", Evaluation = " << evaluation(myrobot, p, n) << endl;
 
-    } //End of Steps loop
+            //####   DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
 
-    return 0;
-}
-```
-+ Compile the code using -
-```sh
-$ cd ~/catkin_ws/src
-$ mkdir Images
-$ g++ mcl.cpp -o mcl_app -std=c++11 -I/usr/include/python2.7 -lpython2.7
-```
-+ Run the program (If you get a warning regarding the ```matplotlib``` library, just ignore it) and you should observe the following results -
-```sh
-$ ./mcl_app
-```
-![step0](step0.png)
-![step49](step49.png)
+            //Graph the position of the robot and the particles at each step
+            visualization(n, myrobot, t, p2, p3);
+
+        } //End of Steps loop
+
+        return 0;
+    }
+    ```
+    + Compile the code using -
+    ```sh
+    $ cd ~/catkin_ws/src
+    $ mkdir Images
+    $ g++ mcl.cpp -o mcl_app -std=c++11 -I/usr/include/python2.7 -lpython2.7
+    ```
+    + Run the program (If you get a warning regarding the ```matplotlib``` library, just ignore it) and you should observe the following results -
+    ```sh
+    $ ./mcl_app
+    ```
+    ![step0](step0.png)
+    ![step49](step49.png)
 
 
 ### Directory Structure
+```bash
+.Project1_Build_My_World
+├── catkin_ws
+│   ├── build
+│   │   ├── ...
+│   ├── devel
+│   │   ├── ...
+│   ├── src
+│   │   ├── my_robot
+│   │   │   ├── config
+│   │   │   │   ├── base_local_planner_params.yaml
+│   │   │   │   ├── costmap_common_params.yaml
+│   │   │   │   ├── global_costmap_params.yaml
+│   │   │   │   ├── local_costmap_params.yaml
+│   │   │   ├── launch
+│   │   │   │   ├── amcl.launch
+│   │   │   │   ├── robot_description.launch
+│   │   │   │   ├── world.launch
+│   │   │   ├── maps
+│   │   │   │   ├── map.pgm
+│   │   │   │   ├── map.yaml
+│   │   │   ├── meshes
+│   │   │   │   ├── hokuyo.dae
+│   │   │   ├── rviz
+│   │   │   │   ├── amclRviz.rviz
+│   │   │   ├── urdf
+│   │   │   │   ├── my_robot.gazebo
+│   │   │   │   ├── my_robot.xacro
+│   │   │   ├── worlds
+│   │   │   │   ├── MyOfficeWorld.world
+│   │   │   │   ├── empty.world
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── pgm_map_creator
+│   │   │   ├── launch
+│   │   │   │   ├── ball_chaser.launch
+│   │   │   ├── src
+│   │   │   │   ├── drive_bot.cpp
+│   │   │   │   ├── process_image.cpp
+│   │   │   ├── srv
+│   │   │   │   ├── DriveToTarget.srv
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── teleop_twist_keyboard
+│   │   │   ├── launch
+│   │   │   │   ├── ball_chaser.launch
+│   │   │   ├── src
+│   │   │   │   ├── drive_bot.cpp
+│   │   │   │   ├── process_image.cpp
+│   │   │   ├── srv
+│   │   │   │   ├── DriveToTarget.srv
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   ├── Screenshots
+└── Readme.md
+```
 
 ### Project Overview, Setup Instructions and Implementation of the project
 This project utilizes the ROS AMCL package in order to accurately localize a mobile robot inside a map in the Gazebo simulation environment. It can be divided into several tasks such as -
@@ -742,11 +798,125 @@ $ roslaunch my_robot world.launch
         ```
         Note that the origin of the map should correspond to your map's size. For example, the default map size is 30 by 30, so the origin will be [-15, -15, 0], i.e. half the size of the map.
 
-3. AML Package:
+3. AMCL Package:
+    The Adaptive Monte Carlo Localization (AMCL) dynamically adjusts the number of particles as the robot navigates in a map. This adaptive behaviour provides a significant computational gain over MCL. The [ROS AMCL Package](http://wiki.ros.org/amcl) executes this type of localization in a given map.
 
+    + AMCL ```launch``` file -
+        - Create a ```launch``` file for the AMCL in the ```launch``` folder of your package -
+        ```sh 
+        $ cd ~/catkin_ws/src/my_robot/launch/
+        $ vi amcl.launch # nano, gedit, or any of your favourite editor
+        ```
+        - Add the following to ```amcl.launch``` -
+        ```xml
+        <launch>
+        <!-- TODO: Add nodes here -->
+	      <!-- Map Server -->
+          <arg name="map_file" default="$(find my_robot)/maps/map.yaml"/>
+          <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+            <param name="frame_id" value="map"/>
+          </node>
+    
+        <!-- AMCL Node -->
+          <node name="amcl" pkg="amcl" type="amcl" output="screen">
+    	      <!-- remap from="/scan" to="/my_robot/laser/scan"/-->
+            <param name="odom_frame_id" value="odom"/>
+            <param name="odom_model_type" value="diff-corrected"/>
+            <param name="base_frame_id" value="robot_footprint"/>
+            <param name="global_frame_id" value="map"/>
+        
+        <!-- If you choose to define initial pose here -->
+            <param name="initial_pose_x" value="0"/>
+            <param name="initial_pose_y" value="0"/>
+          </node>
+    
+        <!-- Move Base -->
+          <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
+    	      <!-- remap from="/scan" to="/my_robot/laser/scan"/-->
+            <param name="base_global_planner" value="navfn/NavfnROS" />
+            <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
+            <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+            <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+            <rosparam file="$(find my_robot)/config/local_costmap_params.yaml" command="load" />
+            <rosparam file="$(find my_robot)/config/global_costmap_params.yaml" command="load" />
+            <rosparam file="$(find my_robot)/config/base_local_planner_params.yaml" command="load" />
+          </node>
+        </launch>
+        ```
+        - The various nodes added are -
+            * The [```map_server``` node](http://wiki.ros.org/map_server): It provides the map data as a ROS service to other nodes, for eg. ```amcl``` node. It locates the map you created in Step #2 of (#project-overview,-setup-instructions-and-implementation-of-the-project) and send it out as map data.
+            * The ```amcl``` node: As discussed above, this node takes ```odometry``` and ```laser scan``` as input data and performs AMCL localization. By default, ```amcl``` package will look for the scan topic for LiDAR data, which in this case is ```Hokuyo```. Alternatively, if your simulation maps the laser data to your robot's topic, you can use ```remap``` tag to remap the topic name ```scan``` to the actual topic name so that the ```amcl``` package could use it! This is how you can add ```remap``` tag and for more info check out the [```remap``` ROS Wiki](http://wiki.ros.org/roslaunch/XML/remap). As described in the [ROS Wiki](http://wiki.ros.org/amcl), you can find the purpose of different parameters of the ```amcl``` node. Since the AMCL package 'links' the robot (```odom``` frame) with the world (```map``` frame), these parameters are required for ```amcl``` package to localize the robot in the world.
+                ```xml
+                ...
+                <!-- AMCL Node -->
+                <node name="amcl" ...>
+                <remap from="scan" to="<YOUR PACKAGE NAME>/laser/scan"/>
+                </node>
+                ```
+            * The ```move_base``` node:  The ```move_base``` package helps to define a navigation goal position for your robot in the map, and the robot will navigate to that goal position. Note that this step is optional if you choose to use teleop node to control and localize your robot. It is a powerful tool that utilizes a costmap representing occupied and unoccupied area. As the robot moves around, the local costmap gets updated in relation to the global costmap allowing the package to define a continuous path for the robot to move along. This package has some built-in corrective behaviors or maneuvers. It allows the robot to move around obstacles, when it gets stuck or rotate the robot until it finds a clear path ahead. To load config fields follow these steps
+                ```sh 
+                $ cd ..
+                $ mkdir config
+                $ cd config
+                $ wget https://s3-us-west-1.amazonaws.com/udacity-robotics/Resource/where_am_i/config.zip
+                ```
+            * The ```teleop``` node: To control the robot help localize itself, you need to add the ```teleop``` node to your package. Clone the ```ros-teleop``` to your ```src``` folder.
+                ```sh
+                $ cd /home/workspace/catkin_ws/src
+                $ git clone https://github.com/ros-teleop/teleop_twist_keyboard
+                ```
+              Build the package and source the setup script
+                ```sh
+                $ cd ..
+                $ catkin_make
+                $ source devel/setup.bash
+                $ git clone https://github.com/ros-teleop/teleop_twist_keyboard
+                ```     
+              Run the ```teleop``` node
+                ```sh
+                $ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+                ```
 
+4. After AMCL is setup and we are up and running with the map, robot localization and navigation nodes let us launch the simulation and test it:
+    + Launching -
+    ```sh
+    $ cd /home/workspace/catkin_ws/
+    $ roslaunch my_robot world.launch
+    ```
+    + In a new terminal, launch the ```amcl``` node -
+    ```sh
+    $ roslaunch my_robot amcl.launch
+    ```
+
+5. Rviz Configuration:
+    In rviz, 
+    + Select ```odom``` for fixed frame
+    + Click the “Add” button and
+        - add ```RobotModel```: this would add the robot itself to RViz
+        - add ```Map``` and select first ```topic/map```: the second and third topics in the list will show the global costmap, and the local costmap. Both can be helpful to tune your parameters
+        - add ```PoseArray``` and select ```topic/particlecloud```: this will display a set of arrows around the robot
+     + Each arrow represents a particle with a pose. Your goal is to add/tune the parameters that will help localize your robot better and thereby improve the pose array.
+     + Save the RViz setup in a configuration file and launch RViz with the same configuration every time. Click ```file``` -> ```save config``` to save the current configuration.
+     + ```Transform Timeout``` and ```Map Update Loop```
+If you received warning on ```Transform Timeout``` and ```Map Update Loop```, you might want to configure the corresponding parameters. Namely larger ```transform_tolerance``` value for the AMCL node and lower ```update_frequency``` & ```publish_frequency``` values in the configuration files.
+     
+      ![rviz1](rviz1.png)
+      ![rviz2](rviz2.png)
+      
+6. Testing:
+    There are two options to control your robot while it localizes itself -
+        + Send ```navigation goal``` via RViz: Click the ```2D Nav Goal``` button in the toolbar, then click and drag on the map to send the goal to the robot. It will start moving and localize itself in the process.
+        + Send move command via ```teleop``` package: You could also use ```teleop``` node to control your robot and observe it localize itself in the environment. Open another terminal and launch the ```teleop``` script. And then you could control your robot by keyboard commands.
+     ```sh
+     $ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+     ```
+     
+     
 ### Future Work
+Design the robot so that it is capable of continuously monitoring its surroundings and stopping whenever an obstacle is encountered.
 
 ### License
+MIT License
 
 ### Contribution
+You may contribute to this project by forking this GitHub repository, creating pull requests or by raising issues.
