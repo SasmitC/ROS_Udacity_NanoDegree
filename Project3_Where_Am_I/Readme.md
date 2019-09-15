@@ -13,7 +13,7 @@ Next, the project implements the Monte Carlo Localization (MCL) algorithm for lo
    * [Requirements](#requirements)
    * [How to use](#how-to-use)
    * [Directory Structure](#directory-structure)
-   * [Project Overview, Setup Instructions and Implementation of the project](#project-overview,-setup-instructions-and-implementation-of-the-project)
+   * [Project Overview Setup Instructions and Implementation of the project](#project-overview-setup-instructions-and-implementation-of-the-project)
    * [Future Work](#future-work)
    * [License](#license)
    * [Contribution](#contribution)
@@ -690,7 +690,7 @@ $ catkin_make
 └── Readme.md
 ```
 
-### Project Overview, Setup Instructions and Implementation of the project
+### Project Overview Setup Instructions and Implementation of the project
 This project utilizes the ROS AMCL package in order to accurately localize a mobile robot inside a map in the Gazebo simulation environment. It can be divided into several tasks such as -
 
 + To create a ROS package that launches a custom robot model in a custom Gazebo world
@@ -708,12 +708,12 @@ $ sudo apt-get install ros-kinetic-amcl
 ```
 
 1. Simulation Setup:
-    + Grab the code from the ![previous project](https://github.com/SasmitC/ROS_Udacity_NanoDegree/tree/master/Project2_Go_Chase_It/catkin_ws/src/my_robot). Create a catkin package by the same name my_robot and copy the contents of above repository into the newly created package on your local machine.
+    + Grab the code from the [previous project](https://github.com/SasmitC/ROS_Udacity_NanoDegree/tree/master/Project2_Go_Chase_It/catkin_ws/src/my_robot). Create a catkin package by the same name my_robot and copy the contents of above repository into the newly created package on your local machine.
 
     + Do a quick ```$catkin_make``` and ```$source the devel/setup.bash``` script. Launch the world to verify if the system is good to go!
-```sh
-$ roslaunch my_robot world.launch
-```
+	```sh
+	$ roslaunch my_robot world.launch
+	```
 
 2. Map Setup:
     + Now that the simulation environment is ready, let us generate a map of it so that the robot knows what to expect when its positioned inside the environment. In reality, engineers utilize Mapping tools to measure and map the area that the robot will be operating in. However, for simplicity, a simulated environment saves us from the going deeper into the advanced mapping challenges. It is possible to generate the map of any simulated world by directly using the ROS package - [pgm_map_creator](https://github.com/udacity/pgm_map_creator).
@@ -844,8 +844,8 @@ $ roslaunch my_robot world.launch
         </launch>
         ```
         - The various nodes added are -
-            * The [```map_server``` node](http://wiki.ros.org/map_server): It provides the map data as a ROS service to other nodes, for eg. ```amcl``` node. It locates the map you created in Step #2 of (#project-overview,-setup-instructions-and-implementation-of-the-project) and send it out as map data.
-            * The ```amcl``` node: As discussed above, this node takes ```odometry``` and ```laser scan``` as input data and performs AMCL localization. By default, ```amcl``` package will look for the scan topic for LiDAR data, which in this case is ```Hokuyo```. Alternatively, if your simulation maps the laser data to your robot's topic, you can use ```remap``` tag to remap the topic name ```scan``` to the actual topic name so that the ```amcl``` package could use it! This is how you can add ```remap``` tag and for more info check out the [```remap``` ROS Wiki](http://wiki.ros.org/roslaunch/XML/remap). As described in the [ROS Wiki](http://wiki.ros.org/amcl), you can find the purpose of different parameters of the ```amcl``` node. Since the AMCL package 'links' the robot (```odom``` frame) with the world (```map``` frame), these parameters are required for ```amcl``` package to localize the robot in the world.
+            + The [```map_server``` node](http://wiki.ros.org/map_server): It provides the map data as a ROS service to other nodes, for eg. ```amcl``` node. It locates the map you created in Step #2 of (#project-overview,-setup-instructions-and-implementation-of-the-project) and send it out as map data.
+            + The ```amcl``` node: As discussed above, this node takes ```odometry``` and ```laser scan``` as input data and performs AMCL localization. By default, ```amcl``` package will look for the scan topic for LiDAR data, which in this case is ```Hokuyo```. Alternatively, if your simulation maps the laser data to your robot's topic, you can use ```remap``` tag to remap the topic name ```scan``` to the actual topic name so that the ```amcl``` package could use it! This is how you can add ```remap``` tag and for more info check out the [```remap``` ROS Wiki](http://wiki.ros.org/roslaunch/XML/remap). As described in the [ROS Wiki](http://wiki.ros.org/amcl), you can find the purpose of different parameters of the ```amcl``` node. Since the AMCL package 'links' the robot (```odom``` frame) with the world (```map``` frame), these parameters are required for ```amcl``` package to localize the robot in the world.
                 ```xml
                 ...
                 <!-- AMCL Node -->
@@ -853,14 +853,14 @@ $ roslaunch my_robot world.launch
                 <remap from="scan" to="<YOUR PACKAGE NAME>/laser/scan"/>
                 </node>
                 ```
-            * The ```move_base``` node:  The ```move_base``` package helps to define a navigation goal position for your robot in the map, and the robot will navigate to that goal position. Note that this step is optional if you choose to use teleop node to control and localize your robot. It is a powerful tool that utilizes a costmap representing occupied and unoccupied area. As the robot moves around, the local costmap gets updated in relation to the global costmap allowing the package to define a continuous path for the robot to move along. This package has some built-in corrective behaviors or maneuvers. It allows the robot to move around obstacles, when it gets stuck or rotate the robot until it finds a clear path ahead. To load config fields follow these steps
+            + The ```move_base``` node:  The ```move_base``` package helps to define a navigation goal position for your robot in the map, and the robot will navigate to that goal position. Note that this step is optional if you choose to use teleop node to control and localize your robot. It is a powerful tool that utilizes a costmap representing occupied and unoccupied area. As the robot moves around, the local costmap gets updated in relation to the global costmap allowing the package to define a continuous path for the robot to move along. This package has some built-in corrective behaviors or maneuvers. It allows the robot to move around obstacles, when it gets stuck or rotate the robot until it finds a clear path ahead. To load config fields follow these steps
                 ```sh 
                 $ cd ..
                 $ mkdir config
                 $ cd config
                 $ wget https://s3-us-west-1.amazonaws.com/udacity-robotics/Resource/where_am_i/config.zip
                 ```
-            * The ```teleop``` node: To control the robot help localize itself, you need to add the ```teleop``` node to your package. Clone the ```ros-teleop``` to your ```src``` folder.
+            + The ```teleop``` node: To control the robot help localize itself, you need to add the ```teleop``` node to your package. Clone the ```ros-teleop``` to your ```src``` folder.
                 ```sh
                 $ cd /home/workspace/catkin_ws/src
                 $ git clone https://github.com/ros-teleop/teleop_twist_keyboard
@@ -901,6 +901,7 @@ $ roslaunch my_robot world.launch
 If you received warning on ```Transform Timeout``` and ```Map Update Loop```, you might want to configure the corresponding parameters. Namely larger ```transform_tolerance``` value for the AMCL node and lower ```update_frequency``` & ```publish_frequency``` values in the configuration files.
      
       ![rviz1](rviz1.png)
+      
       ![rviz2](rviz2.png)
       
 6. Testing:
