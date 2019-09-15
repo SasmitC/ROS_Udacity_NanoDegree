@@ -43,14 +43,14 @@ $ catkin_make
 ```
 
 2. One time Gazebo setup step -
-+ [Install](http://gazebosim.org/tutorials?tut=install_ubuntu&cat=install)
-```sh
-$ curl -sSL http://get.gazebosim.org | sh
-```
-+ Run
-```sh
-$ gazebo
-```
+    + [Install](http://gazebosim.org/tutorials?tut=install_ubuntu&cat=install)
+    ```sh
+    $ curl -sSL http://get.gazebosim.org | sh
+    ```
+    + Run
+    ```sh
+    $ gazebo
+    ```
 
 3. Now that catkin_ws is set up locally on your machine, Clone this repository to your desired path using -
 ```sh
