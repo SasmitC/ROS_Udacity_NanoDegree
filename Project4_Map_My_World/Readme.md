@@ -36,9 +36,13 @@ In this module, you will be dealing with the **FastSLAM** algorithm, which is ba
         - ```poses.txt```: The exact robot poses at each timestamp recorded over a period of 413 seconds (timestamp, x, y, ϴ).
     + Global Functions
         - ```inverseSensorModel()```: To compute ```r``` and ```phi``` and evaluate the three different cases of the algorithm.
+        
           ![inverseSensorModel](inverseSensorModel.png)
+          
         - ```occupancyGridMapping()```: The core algorithm
+        
           ![occupancy_grid_algorithm](occupancygridalgorithm.png)
+          
     + Main Function
         - ```File Scan```: To scan both the measurement and poses files to retrieve the values. At each time stamp, the values are passed to the occupancy grid mapping function.
         - ```Display Map```: To display the generated map after processing all the measurements and poses.
@@ -196,13 +200,13 @@ int main()
     ```
     + Now, wait for the program to generate the map and store it in the Project4_Map_My_World/OccupancyGridMapping/Images directory. The generated map should look something like the following -
     + Map Legend:
-        - ![#f03c15](https://placehold.it/15/008000/000000?text=+ "Green - Unknown/Undiscovered Zone") 
-        - ![#f03c15](https://placehold.it/15/ff0000/000000?text=+ "Red - Free Zone") 
-        - ![#f03c15](https://placehold.it/15/000000/000000?text=+ "Black - Occupied Zone") 
+        - ![#f03c15](https://placehold.it/15/008000/000000?text=+ "Green - Unknown/Undiscovered Zone") `Green - Unknown/Undiscovered Zone`
+        - ![#f03c15](https://placehold.it/15/ff0000/000000?text=+ "Red - Free Zone") `Red - Free Zone`
+        - ![#f03c15](https://placehold.it/15/000000/000000?text=+ "Black - Occupied Zone") `Black - Occupied Zone`
     
     ![generated_map](OccupancyGridMapping/Images/map.png)
 
-For more information on **Occupancy Grid Mapping** refer [this paper].(Knowledge_Portal/InTech-Occupancy_grid_maps_for_localization_and_mapping.pdf)
+For more information on **Occupancy Grid Mapping** refer [this paper](Knowledge_Portal/InTech-Occupancy_grid_maps_for_localization_and_mapping.pdf).
         
 
 ### Directory Structure
