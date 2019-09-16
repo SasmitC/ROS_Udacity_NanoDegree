@@ -187,7 +187,8 @@ int main()
 }
 ```
 
-2. Generate the map: After coding the _Occupancy Grid Mapping algorithm_ in C++ and generating a map 2D vector, its time to visualize the generated map! Basically, you'll plot different cells - occupied, free and unknown cells on a graph to generate the map. Check out this [link](https://github.com/lava/matplotlib-cpp) for more information on the matplotlib C++ library. For information regarding the plot color and shape refer to the LineSpec and LineColor section of the [MATLAB documentation](https://www.mathworks.com/help/matlab/ref/plot.html?ue).
+2. Generate the map: 
+    After coding the _Occupancy Grid Mapping algorithm_ in C++ and generating a map 2D vector, its time to visualize the generated map! Basically, you'll plot different cells - occupied, free and unknown cells on a graph to generate the map. Check out this [link](https://github.com/lava/matplotlib-cpp) for more information on the matplotlib C++ library. For information regarding the plot color and shape refer to the LineSpec and LineColor section of the [MATLAB documentation](https://www.mathworks.com/help/matlab/ref/plot.html?ue).
     + Compile the program -
     ```sh
     $ cd Project4_Map_My_World/OccupancyGridMapping/
@@ -206,8 +207,124 @@ int main()
     
     ![generated_map](OccupancyGridMapping/Images/map.png)
 
-For more information on **Occupancy Grid Mapping** refer [this paper](Knowledge_Portal/InTech-Occupancy_grid_maps_for_localization_and_mapping.pdf).
-        
+    For more information on **Occupancy Grid Mapping** refer [this paper](Knowledge_Portal/InTech-Occupancy_grid_maps_for_localization_and_mapping.pdf).
+
+    Mapping with a mobile robot equipped with more than one perception sensor such as LIDAR, RGBD Camera, Radar or Ultrasonic Sensor leads to an enormous size of the  map. But it becomes necessary to combine the data from more than sources into a single map. An intuitive approach maybe to implement Occupancy Grid Mapping Algorithm for individual sensor models. However, this will fail since each sensor has different characteristics and they respond differently to different type of obstacles. The best approach to the _multi sensor fusion_ problem is to build separate maps for each sensor independently of each other and then integrate them. By implementing _De Morgan's Law_ you can combine these individual maps with each cell denoting the combined estimated occupancy values. To obtain the most likely map, the maximum value of each cell in resultant map can be computed. Another approach is perform an OR operation between values of each cell. An illustration of _multi sensor fusion_ to generate a map is shown below -
+
+    ```cpp
+    #include <iostream>
+    #include <math.h>
+    using namespace std;
+
+    const int mapWidth =  2;
+    const int mapHeight = 2;
+
+    void sensorFusion(double m1[][mapWidth], double m2[][mapWidth])
+    {
+        for (int x = 0; x < mapHeight; x++) {
+            for (int y = 0; y < mapWidth; y++) {
+                double p = 1 - (1 - m1[x][y]) * (1 - m2[x][y]);
+                cout << p << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    int main()
+    {
+
+        double m1[mapHeight][mapWidth] = { { 0.9, 0.6 }, { 0.1, 0.5 } };
+        double m2[mapHeight][mapWidth] = { { 0.3, 0.4 }, { 0.4, 0.3 } };
+        sensorFusion(m1, m2);
+
+        return 0;
+    }
+    ```
+
+3. Implement Grid-based FastSLAM Algorithm:
+    For a quick read, please refer this concise explanation on [Grid-based FastSLAM Algorithm](https://fjp.at/posts/slam/fastslam/). After going through the nitty-gritty of the algorithm, let us put it to test and simulate the results. Here, you will implement the [```gmapping``` ROS package](http://wiki.ros.org/gmapping) which is based on the **Grid-based FastSLAM Algorithm** to map the environment. ```gmapping``` provides laser and odometry based SLAM and 2D occupancy grid map of the environment. The map gets updated as the robot moves and gathers sensor data. You will learn to deploy a turtlebot inside a willow garage environment.
+    
+    + Create a catkin_ws in your project directory -
+    ```sh
+    $ mkdir -p ~/catkin_ws/src
+    $ cd ~/catkin_ws/src
+    $ catkin_init_workspace
+    $ cd ..
+    $ catkin_make
+    ```
+    
+    + Clone the ```turtlebot_gazebo``` and ```turtlebot_teleop``` in src directory -
+    ```sh
+    $ cd ~/catkin_ws/src
+    $ git clone https://github.com/turtlebot/turtlebot_simulator
+    $ git clone https://github.com/turtlebot/turtlebot
+    ```
+    
+    + Install the package dependencies -
+    ```sh
+    $ cd ..
+    $ source devel/setup.bash
+    $ rosdep -i install turtlebot_gazebo
+    $ rosdep -i install turtlebot_teleop
+    ```
+    
+    + Build the packages -
+    ```sh
+    $ catkin_make
+    $ source devel/setup.bash
+    ```
+    
+    + Clone the ```gmapping``` package, install its dependencies and build catkin workspace -
+    ```sh
+    $ cd ~/catkin_ws/src
+    $ git clone https://github.com/ros-perception/slam_gmapping
+    $ rosdep install gmapping
+    $ cd..
+    $ catkin_make
+    ```
+    
+    + In terminal #1, deploy the ```turtlebot``` in a willow garage envrironment -
+    ```sh
+    $ cd ~/catkin_ws
+    $ source devel/setup.bash
+    $ roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=worlds/willowgarage.world
+    ```
+    
+    + In terminal #2, launch the ```teleop``` node -
+    ```sh
+    $ cd ~/catkin_ws
+    $ source devel/setup.bash
+    $ roslaunch turtlebot_teleop keyboard_teleop.launch
+    ```
+    
+    + In terminal #3, run the ```slam_gmapping``` node -
+    ```sh
+    $ cd ~/catkin_ws
+    $ source devel/setup.bash
+    $ rosrun gmapping slam_gmapping
+    ```
+    
+    + Run rviz and subscribe to the various published topics to visualize the map-
+    ```sh
+    $ rosrun rviz rviz
+    ```
+    Edit the rviz configuration as follows:
+        * Change the **Fixed Frame** to ```map```
+        * Keep **Reference Frame** as default
+        * Add a **RobotModel**
+        * Add a **camera** and select the ```/camera/rgb/image_raw``` topic
+        * Add a **map** and select the ```/map``` topic
+    
+    + Save the map of the environment(map.pgm and map.yaml will be generated) -
+    ```sh
+    $ map_server map_saver -f myMap
+    ```
+    With the [map_saver](http://wiki.ros.org/map_server), you can load and save the maps.
+    
+    ![willow-garage-map](willow-garage-map.png.jpg)
+    
+    ![rvizOutput](Output.png)
+
 
 ### Directory Structure
 
