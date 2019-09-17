@@ -562,6 +562,13 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
 	+ Hide the marker once your robot reaches the pickup zone
 	+ Wait 5 seconds to simulate a pickup
 	+ Show the marker at the drop off zone once your robot reaches it
+	
+
+A video demonstration of the project:
+[![HomeServiceRobot](HomeServiceRobot.png)](https://youtu.be/HwDrsTUudWY "Home Service Robot")
+
+_Click on the image above to redirect to Youtube URL_
+
 
 ### Future Work
 You may add more tasks for the robot to complete in the virtual world.
