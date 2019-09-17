@@ -32,7 +32,7 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
 ### How to use
 1. Breadth First Search:
     The task is to find the shortest path for a robot moving inside a 5x6 map from start to goal position.
-    + Given -
+    Given -
     	
 	| 0 | 1 | 0 | 0 | 0 | 0 |
 	|---|---|---|---|---|---|
@@ -450,7 +450,106 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
         
 	
 ### Directory Structure
-
+```bash
+.Project5_Home_Service_Robot
+├── catkin_ws
+│   ├── build
+│   │   ├── ...
+│   ├── devel
+│   │   ├── ...
+│   ├── src
+│   │   ├── add_markers
+│   │   │   ├── src
+│   │   │   │   ├── add_markers_node.cpp
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── home_service
+│   │   │   ├── src
+│   │   │   │   ├── add_markers_node.cpp
+│   │   │   ├── launch
+│   │   │   │   ├── home_service.launch
+│   │   │   ├── maps
+│   │   │   │   ├── map.pgm
+│   │   │   │   ├── map.yaml
+│   │   │   ├── rviz
+│   │   │   │   ├── home_service_navigation.rviz
+│   │   │   ├── worlds
+│   │   │   │   ├── MyOfficeWorld.world
+│   │   │   │   ├── empty.world
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── home_service_add_markers
+│   │   │   ├── src
+│   │   │   │   ├── home_service_add_markers_node.cpp
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── home_service_pick_objects
+│   │   │   ├── src
+│   │   │   │   ├── home_service_pick_objects_node.cpp
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── maps
+│   │   │   ├── map.pgm
+│   │   │   ├── map.yaml
+│   │   ├── pgm_map_creator
+│   │   │   ├── launch
+│   │   │   │   ├── request_publisher.launch
+│   │   │   ├── maps
+│   │   │   │   ├── map.pgm
+│   │   │   ├── msgs
+│   │   │   │   ├── collision_map_request.proto
+│   │   │   │   ├── CMakeLists.txt
+│   │   │   ├── src
+│   │   │   │   ├── collision_map_creator.cc
+│   │   │   │   ├── request_publisher.cc
+│   │   │   ├── world
+│   │   │   │   ├── MyOfficeWorld.world
+│   │   │   ├── README.md
+│   │   │   ├── LICENSE
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── pick_objects
+│   │   │   ├── src
+│   │   │   │   ├── pick_objects_node.cpp
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── rvizConfig
+│   │   │   ├── home_service_test_navigation.rviz
+│   │   ├── scripts
+│   │   │   ├── home_service.sh
+│   │   │   ├── launch.sh
+│   │   │   ├── test_add_markers.sh
+│   │   │   ├── test_home_service.sh
+│   │   │   ├── test_navigation.sh
+│   │   │   ├── test_pick_objects.sh
+│   │   │   ├── test_slam.sh
+│   │   ├── slam_gmapping
+│   │   │   ├── ...
+│   │   ├── test_home_service
+│   │   │   ├── maps
+│   │   │   │   ├── ...
+│   │   │   ├── rviz
+│   │   │   │   ├── ...
+│   │   │   ├── src
+│   │   │   │   ├── ...
+│   │   │   ├── world
+│   │   │   │   ├── building_wall
+│   │   │   │   │   ├── model.config
+│   │   │   │   │   ├── model.sdf
+│   │   │   │   ├── my_world
+│   │   │   │   │   ├── test_world.world
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── turtlebot
+│   │   │   ├── ...
+│   │   ├── turtlebot_interactions
+│   │   │   ├── ...
+│   │   ├── turtlebot_simulator
+│   │   │   ├── ...
+│   │   ├── CMakeLists.txt
+│   │   ├── package.xml
+└── Readme.md
+```
 
 ### Project Implementation
 1. Simulation Setup: Here’s the list of the official ROS packages that you will need to grab, and other packages and directories that you’ll need to create at a later stage as you go through the project. Import these packages from the official websites in the ```src``` directory of you ```catkin_ws``` workspace -
