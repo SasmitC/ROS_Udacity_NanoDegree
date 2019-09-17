@@ -12,8 +12,8 @@ There are many potential applications of Path Planning for autonomous robots suc
 The outcome of this module include recognizing different types of path planning algorithms, understanding their working, evaluating the suitability of an algorithm for particular applications and implementing the algorithms in C++. You will learn about different approaches to Path Planning - discrete (or combinatorial), sample-based and probabilistic path planning.
 
 **Terminology**:
-**Complete** - An algorithm is complete if it is able to find a path between the start and the goal when one exists.
-**Optimal** - An algorithm is optimal if it is able to find the best solution.
++ **Complete** - An algorithm is complete if it is able to find a path between the start and the goal when one exists.
++ **Optimal** - An algorithm is optimal if it is able to find the best solution.
 
 For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
 
@@ -33,11 +33,13 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
 1. Breadth First Search:
     The task is to find the shortest path for a robot moving inside a 5x6 map from start to goal position.
     + Given -
-        - Grid (5x6):               0 1 0 0 0 0
-                                    0 1 0 0 0 0
-                                    0 1 0 0 0 0
-                                    0 1 0 0 0 0
-                                    0 0 0 1 1 0
+        - Grid (5x6):               
+	
+			0 | 1 | 0 | 0 | 0 | 0
+                        0 | 1 | 0 | 0 | 0 | 0
+                        0 | 1 | 0 | 0 | 0 | 0
+                        0 | 1 | 0 | 0 | 0 | 0
+                        0 | 0 | 0 | 1 | 1 | 0
         
         - Start position: 0,0
         - Goal position:  4,5
@@ -212,7 +214,8 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
     ```
 
     + The output of the BFS algorithm should look like -
-                                    ![BFSoutput](BFSoutput.png)
+    
+    ![BFSoutput](BFSoutput.png)
                                     
 2. A* Shortest Path: The task is same as above.
 
@@ -394,14 +397,17 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
     ```
 
 3. Comparison between BFS and A* :
-    +                                       BFS
-                                    ![BFSCost](BFSCost.png)
+    + BFS
+    
+    ![BFSCost](BFSCost.png)
 
-    +                                       A*
-                                    ![AstarCost](AstarCost.png)
+    + A*
+    
+    ![AstarCost](AstarCost.png)
 
-    +                                      Path
-                                    ![Output](BFSoutput.png)
+    + Path
+    
+    ![Output](BFSoutput.png)
                                     
     + Result: A* is more efficient since it did not expand in the free space as BFS did. With A* we reached the goal with only 11 expansions compared to 20 with BFS.
     
