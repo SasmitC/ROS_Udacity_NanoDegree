@@ -634,7 +634,7 @@ $ catkin_make
 
 ### Directory Structure
 ```bash
-.Project1_Build_My_World
+.Project3_Where_Am_I
 ├── catkin_ws
 │   ├── build
 │   │   ├── ...
