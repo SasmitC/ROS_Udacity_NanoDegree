@@ -217,14 +217,13 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
 
     + The output of the BFS algorithm should look like -
     
-	| v | - | 0 | 0 | 0 | 0 |
+	| v | - | - | - | - | - |
 	|---|---|---|---|---|---|
-	| **v** | **-** | **-** | **-** | **-** | **-** |
-	| **v** | **-** | **-** | **-** | **-** | **-** |
-	| **v** | **-** | **>** | **>** | **>** | **v** |
-	| **>** | **>** | **^** | **-** | **-** | **#** |
+	| v | **-** | **-** | **-** | **-** | **-** |
+	| v | **-** | **-** | **-** | **-** | **-** |
+	| v | **-** | > | > | > | v |
+	| > | > | ^ | **-** | **-** | * |
 	
-    ![BFSoutput](BFSoutput.png)
                                     
 2. A* Shortest Path: The task is same as above.
 
@@ -405,19 +404,34 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
 	}
     ```
 
-3. Comparison between BFS and A* :
+3. Comparison between BFS and A* in termsof the cost path:
     + BFS
-    
-    ![BFSCost](BFSCost.png)
+    	
+	| 0 | -1 | 13 | 17 | -1 | -1 |
+	|---|---|---|---|---|---|
+	| **1** | **-1** | **10** | **14** | **18** | **-1** |
+	| **2** | **-1** | **8** | **11** | **15** | **19** |
+	| **3** | **-1** | **7** | **9** | **12** | **16** |
+	| **4** | **5** | **6** | **-1** | **-1** | **20** |
 
     + A*
-    
-    ![AstarCost](AstarCost.png)
+    	
+	| 0 | -1 | -1 | -1 | -1 | -1 |
+	|---|---|---|---|---|---|
+	| **1** | **-1** | **-1** | **-1** | **-1** | **-1** |
+	| **2** | **-1** | **-1** | **-1** | **-1** | **-1** |
+	| **3** | **-1** | **7** | **8** | **9** | **10** |
+	| **4** | **5** | **6** | **-1** | **-1** | **11** |
 
     + Path
     
-    ![Output](BFSoutput.png)
-                                    
+	| v | - | - | - | - | - |
+	|---|---|---|---|---|---|
+	| v | **-** | **-** | **-** | **-** | **-** |
+	| v | **-** | **-** | **-** | **-** | **-** |
+	| v | **-** | > | > | > | v |
+	| > | > | ^ | **-** | **-** | * |
+	                               
     + Result: A* is more efficient since it did not expand in the free space as BFS did. With A* we reached the goal with only 11 expansions compared to 20 with BFS.
     
     + Real World Map Visualization of A* Algorithm: For the Map in the previous project, the path planned is shown as below -
