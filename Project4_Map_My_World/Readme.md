@@ -327,6 +327,60 @@ int main()
     
     
 ### Directory Structure
+```bash
+.Project4_Map_My_World
+├── catkin_ws
+│   ├── Knowledge_Portal
+│   │   ├── ...
+│   ├── OccupancyGridMapping
+│   │   ├── Data
+│   │   │   ├── measurement.txt
+│   │   │   ├── poses.txt
+│   │   ├── Images
+│   │   │   ├── map.png
+│   │   ├── src
+│   │   │   ├── matplotlibcpp.h
+│   │   ├── main.cpp
+│   ├── build
+│   │   ├── ...
+│   ├── devel
+│   │   ├── ...
+│   ├── src
+│   │   ├── my_robot
+│   │   │   ├── config
+│   │   │   │   ├── base_local_planner_params.yaml
+│   │   │   │   ├── costmap_common_params.yaml
+│   │   │   │   ├── global_costmap_params.yaml
+│   │   │   │   ├── local_costmap_params.yaml
+│   │   │   ├── launch
+│   │   │   │   ├── localization.launch
+│   │   │   │   ├── mapping.launch
+│   │   │   │   ├── robot_description.launch
+│   │   │   │   ├── teleop.launch
+│   │   │   │   ├── world.launch
+│   │   │   ├── maps
+│   │   │   │   ├── map.pgm
+│   │   │   │   ├── map.yaml
+│   │   │   ├── meshes
+│   │   │   │   ├── hokuyo.dae
+│   │   │   ├── rviz
+│   │   │   │   ├── mapMyWorldRviz.rviz
+│   │   │   ├── urdf
+│   │   │   │   ├── my_robot.gazebo
+│   │   │   │   ├── my_robot.xacro
+│   │   │   ├── worlds
+│   │   │   │   ├── MyOfficeWorld.world
+│   │   │   │   ├── empty.world
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+│   │   ├── teleop_twist_keyboard
+│   │   │   ├── teleop_twist_keyboard.py
+│   │   │   ├── README.md
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── package.xml
+└── Readme.md
+```
+
 
 ### Project Implementation
 Welcome to the project Map My World !
@@ -539,7 +593,7 @@ Welcome to the project Map My World !
 
 6. Database Analysis: The ```rtabmap-databaseViewer``` is a great tool for exploring your database when you are done generating it. It is isolated from ROS and allows for complete analysis of your mapping session. This is how you will check for loop closures, generate 3D maps for viewing, extract images, check feature mapping rich zones, and much more.
 
-    ![rtab-dbviewer](rtab-dbviewer.png)
+    ![rtab-dbviewer](MappedWorld1.png)
 
     + You can open the mapping database by entering the following command in a new terminal -
     ```sh
@@ -559,6 +613,20 @@ Welcome to the project Map My World !
         - In the middle you have different images from the mapping process. Here you can scrub through images to see all of the features from your detection algorithm. These features are in yellow. The pink indicates where two images have features in common and this information is being used to create neighboring links and loop closures
         - On the right you can see the constraint view. This is where you can identify where and how the neighboring links and loop closures were created.
         - You can see the number of loop closures in the bottom left. The codes stand for the following: Neighbor, Neighbor Merged, Global Loop closure, Local loop closure by space, Local loop closure by time, User loop closure, and Prior link.
+	
+    + **Output Results**:
+	
+	
+	![rtab-map-rviz](MappedWorld2.png)
+	
+	
+	![rtab-map-3D-1](MappedWorld3.png)
+	
+	
+	![rtab-map-3D-2](MappedWorld4.png)
+	
+	
+	
         
 7. RTAB-Map Localization: If you desire to perform localization using the map you created, there are only a few changes you need to make. You can start by duplicating your ```mapping.launch``` file and renaming the duplicated file to ```localization.launch```. This is another method for localization you can keep in mind when working on your next robotics project. The following changes also need to be made to the localization.launch file -
 
