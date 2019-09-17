@@ -35,7 +35,6 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
     + Given -
     	
 	| 0 | 1 | 0 | 0 | 0 | 0 |
-	|---|---|---|---|---|---|
 	| 0 | 1 | 0 | 0 | 0 | 0 |
 	| 0 | 1 | 0 | 0 | 0 | 0 |
 	| 0 | 1 | 0 | 0 | 0 | 0 |
