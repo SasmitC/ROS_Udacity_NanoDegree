@@ -22,7 +22,7 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
    * [Requirements](#requirements)
    * [How to use](#how-to-use)
    * [Directory Structure](#directory-structure)
-   * [Implementation](#implementation)
+   * [Project Implementation](#project-implementation)
    * [Future Work](#future-work)
    * [License](#license)
    * [Contribution](#contribution)
@@ -404,52 +404,170 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
 	}
     ```
 
-3. Comparison between BFS and A* in termsof the cost path:
+3. Comparison between BFS and A* in terms of the path cost:
     + BFS
     	
-	| 0 | -1 | 13 | 17 | -1 | -1 |
-	|---|---|---|---|---|---|
-	| **1** | **-1** | **10** | **14** | **18** | **-1** |
-	| **2** | **-1** | **8** | **11** | **15** | **19** |
-	| **3** | **-1** | **7** | **9** | **12** | **16** |
-	| **4** | **5** | **6** | **-1** | **-1** | **20** |
+		| 0 | -1 | 13 | 17 | -1 | -1 |
+		|---|---|---|---|---|---|
+		| **1** | **-1** | **10** | **14** | **18** | **-1** |
+		| **2** | **-1** | **8** | **11** | **15** | **19** |
+		| **3** | **-1** | **7** | **9** | **12** | **16** |
+		| **4** | **5** | **6** | **-1** | **-1** | **20** |
+		
 
     + A*
     	
-	| 0 | -1 | -1 | -1 | -1 | -1 |
-	|---|---|---|---|---|---|
-	| **1** | **-1** | **-1** | **-1** | **-1** | **-1** |
-	| **2** | **-1** | **-1** | **-1** | **-1** | **-1** |
-	| **3** | **-1** | **7** | **8** | **9** | **10** |
-	| **4** | **5** | **6** | **-1** | **-1** | **11** |
+		| 0 | -1 | -1 | -1 | -1 | -1 |
+		|---|---|---|---|---|---|
+		| **1** | **-1** | **-1** | **-1** | **-1** | **-1** |
+		| **2** | **-1** | **-1** | **-1** | **-1** | **-1** |
+		| **3** | **-1** | **7** | **8** | **9** | **10** |
+		| **4** | **5** | **6** | **-1** | **-1** | **11** |
+		
 
     + Path
     
-	| v | - | - | - | - | - |
-	|---|---|---|---|---|---|
-	| v | **-** | **-** | **-** | **-** | **-** |
-	| v | **-** | **-** | **-** | **-** | **-** |
-	| v | **-** | > | > | > | v |
-	| > | > | ^ | **-** | **-** | * |
+		| v | - | - | - | - | - |
+		|---|---|---|---|---|---|
+		| v | **-** | **-** | **-** | **-** | **-** |
+		| v | **-** | **-** | **-** | **-** | **-** |
+		| v | **-** | > | > | > | v |
+		| > | > | ^ | **-** | **-** | * |
+		
 	                               
     + Result: A* is more efficient since it did not expand in the free space as BFS did. With A* we reached the goal with only 11 expansions compared to 20 with BFS.
     
-    + Real World Map Visualization of A* Algorithm: For the Map in the previous project, the path planned is shown as below -
+    + Real World Map Visualization of A* Algorithm: For the Map in the previous project, the path planned using A* Algorithm is shown as below -
     
         ![AstarMap](Astarpath.png)
         
     + Map Legend:
+    
         - ![#f03c15](https://placehold.it/15/008000/000000?text=+ "Green - Unknown/Undiscovered Zone") `Green - Unknown/Undiscovered Zone`
         - ![#f03c15](https://placehold.it/15/ff0000/000000?text=+ "Red - Free Zone") `Red - Free Zone`
         - ![#f03c15](https://placehold.it/15/000000/000000?text=+ "Black - Occupied Zone") `Black - Occupied Zone`        
         - ![#f03c15](https://placehold.it/15/0000ff/000000?text=+ "Blue - Shortest Path") `Blue - Shortest Path` 
         
+	
 ### Directory Structure
 
-### Implementation
+
+### Project Implementation
+1. Simulation Setup: Here’s the list of the official ROS packages that you will need to grab, and other packages and directories that you’ll need to create at a later stage as you go through the project. Import these packages from the official websites in the ```src``` directory of you ```catkin_ws``` workspace -
+
+	+ [gmapping](http://wiki.ros.org/gmapping): With the ```gmapping_demo.launch``` file, you can easily perform SLAM and build a map of the environment with a robot equipped with laser range finder sensors or RGB-D cameras.
+	
+	+ [turtlebot_teleop](http://wiki.ros.org/turtlebot_teleop): With the ```keyboard_teleop.launch``` file, you can manually control a robot using keyboard commands.
+	
+	+ [turtlebot_rviz_launchers](http://wiki.ros.org/turtlebot_rviz_launchers): With the ```view_navigation.launch``` file, you can load a preconfigured rviz workspace. You’ll save a lot of time by launching this file, because it will automatically load the robot model, trajectories, and map for you.
+	
+	+ [turtlebot_gazebo](http://wiki.ros.org/turtlebot_gazebo): With the ```view_navigation.launch``` file, you can load a preconfigured ```rviz``` workspace. You’ll save a lot of time by launching this file, because it will automatically load the robot model, trajectories, and map for you.
+	
+	+ map: Inside this directory, you will store your gazebo world file and the map generated from SLAM.
+
+	+ scripts: Inside this directory, you’ll store your shell scripts.
+
+	+ rvizConfig: Inside this directory, you’ll store your customized rviz configuration files.
+
+	+ pick_objects: You will write a node that commands your robot to drive to the pickup and drop off zones.
+
+	+ add_markers: You will write a node that model the object with a marker in ```rviz```.
+	
+	
+
+2. SLAM Testing: The next task of this project is to autonomously map the environment you designed earlier with the Building Editor in Gazebo. But before you tackle autonomous mapping, it’s important to test if you are able to manually perform SLAM by teleoperating your robot. The goal of this step is to manually test SLAM.
+
+	+ Write a shell script ```test_slam.sh``` that will deploy a turtlebot inside your environment, control it with keyboard commands, interface it with a SLAM package, and visualize the map in ```rviz```.
+	
+	+ Run and Test -
+	
+	![test_slam](l6-c6-testing-slam.png)
+	
+	
+3. Localization and Navigation Testing: The next task of this project is to pick two different goals and test your robot's ability to reach them and orient itself with respect to them. We will refer to these goals as the pickup and drop off zones. This section is only for testing purposes to make sure our robot is able to reach these positions before autonomously commanding it to travel towards them.
+
+	+ We will be using the ROS Navigation stack, which is based on the Dijkstra's, a variant of the Uniform Cost Search algorithm, to plan our robot trajectory from start to goal position. Write a test_navigation.sh shell script that launches these files -
+	
+	
+4. Reaching Multiple Goals: Now, you will write a node that will communicate with the ROS navigation stack and autonomously send successive goals for your robot to reach. As mentioned earlier, the ROS navigation stack creates a path for your robot based on **Dijkstra's** algorithm, a variant of the **Uniform Cost Search** algorithm, while avoiding obstacles on its path.
+
+	+ Here’s the C++ code of this node which sends a single goal for the robot to reach -
+	
+    ```cpp
+	#include <ros/ros.h>
+	#include <move_base_msgs/MoveBaseAction.h>
+	#include <actionlib/client/simple_action_client.h>
+
+	// Define a client for to send goal requests to the move_base server through a SimpleActionClient
+	typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
+
+	int main(int argc, char** argv){
+  	// Initialize the simple_navigation_goals node
+  	ros::init(argc, argv, "simple_navigation_goals");
+
+  	//tell the action client that we want to spin a thread by default
+  	MoveBaseClient ac("move_base", true);
+
+  	// Wait 5 sec for move_base action server to come up
+  	while(!ac.waitForServer(ros::Duration(5.0))){
+    		ROS_INFO("Waiting for the move_base action server to come up");
+  	}
+
+  	move_base_msgs::MoveBaseGoal goal;
+
+  	// set up the frame parameters
+  	goal.target_pose.header.frame_id = "base_link";
+  	goal.target_pose.header.stamp = ros::Time::now();
+
+  	// Define a position and orientation for the robot to reach
+  	goal.target_pose.pose.position.x = 1.0;
+  	goal.target_pose.pose.orientation.w = 1.0;
+
+   	// Send the goal position and orientation for the robot to reach
+  	ROS_INFO("Sending goal");
+  	ac.sendGoal(goal);
+
+  	// Wait an infinite time for the results
+  	ac.waitForResult();
+
+  	// Check if the robot reached its goal
+  	if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+    		ROS_INFO("Hooray, the base moved 1 meter forward");
+  	else
+    		ROS_INFO("The base failed to move forward 1 meter for some reason");
+
+  	return 0;
+	}	
+    ```
+	
+	+ You will need to customize above code to create pick up and drop off zones. The ```pick_objects.pp``` code can be found in the [```/Project5_Home_Service_Robot/catkin_ws/src/pick_objects/src/```](catkin_ws/src/pick_objects/src/pick_objects_node.cpp) directory.
+	
+
+5. Modeling Virtual Objects: The final task of this project is to model a virtual object with markers in rviz. The virtual object is the one being picked and delivered by the robot, thus it should first appear in its pickup zone, and then in its drop off zone once the robot reaches it. Check out the [tutorial](http://wiki.ros.org/rviz/Tutorials/Markers%3A%20Basic%20Shapes) and go through the documentation to get started.
+
+	Your code should follow this algorithm:
+	
+	+ Publish the marker at the pickup zone
+	+ Pause 5 seconds
+	+ Hide the marker
+	+ Pause 5 seconds
+	+ Publish the marker at the drop off zone
+	
+	
+6. Home Service Robot: Now it’s time to simulate a full home service robot capable of navigating to pick up and deliver virtual objects. To do so, the ```add_markers``` and ```pick_objects``` node should be communicating. Or, more precisely, the **add_markers** node should subscribe to your **odometry** to keep track of your robot pose.
+
+	Modify the add_markers node as follows:
+
+	+ Initially show the marker at the pickup zone
+	+ Hide the marker once your robot reaches the pickup zone
+	+ Wait 5 seconds to simulate a pickup
+	+ Show the marker at the drop off zone once your robot reaches it
 
 ### Future Work
+You may add more tasks for the robot to complete in the virtual world.
 
 ### License
+MIT License
 
 ### Contribution
+You may contribute to this project by forking this GitHub repository, creating pull requests or by raising issues.
