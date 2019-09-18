@@ -31,7 +31,20 @@ For a quick demo, jump directly to [The video demonstration of the project](#the
    * [License](#license)
    * [Contribution](#contribution)
 
+
 ### Requirements
+1. Linux OS or a Virtual Machine for Windows/Mac OS
+2. Github
+3. C++
+4. ROS kinetic version
+5. Gazebo
+6. Understanding of [Motion Planning in robotics](https://en.wikipedia.org/wiki/Motion_planning), [Path Planning](https://www.sciencedirect.com/topics/engineering/path-planning)
+7. Understanding of [Minkowski sums and differences](http://twistedoakstudios.com/blog/Post554_minkowski-sums-and-differences) and [Configuration space in robotics](http://planning.cs.uiuc.edu/node123.html)
+8. Understanding of [Visibility Graph](https://en.wikipedia.org/wiki/Visibility_graph), [Voronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram), [Potential field in path planning](https://www.cs.cmu.edu/~motionplanning/lecture/Chap4-Potential-Field_howie.pdf)
+9. Understanding of several [Graph Search Algorithms](https://cs.stanford.edu/people/abisee/gs.pdf), [Breadth First Graph](https://en.wikipedia.org/wiki/Breadth-first_search), [Depth First Graph](https://en.wikipedia.org/wiki/Depth-first_search), [Uniform Cost Search](https://algorithmicthoughts.wordpress.com/2012/12/15/artificial-intelligence-uniform-cost-searchucs/), [Dijkstra's Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) and [A* Search Algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm)
+10. Understanding of [Sample-Based Planning](http://planning.cs.uiuc.edu/ch5.pdf), [Probabilistic Map Planners](http://www.staff.science.uu.nl/~gerae101/pdf/compare.pdf), [Rapidly-exploring random] tree(https://en.wikipedia.org/wiki/Rapidly-exploring_random_tree), [Markov Decision Process](https://en.wikipedia.org/wiki/Markov_decision_process),
+ [Value Iteration Algorithm](https://www.ics.uci.edu/~dechter/publications/r42a-mdp_report.pdf)
+ 
 
 ### How to use
 1. Breadth First Search:
