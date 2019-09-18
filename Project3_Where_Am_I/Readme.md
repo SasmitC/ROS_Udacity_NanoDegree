@@ -7,6 +7,7 @@ The project starts with a C++ implementation of the Extended Kalman Filter (EKF)
 
 Next, the project implements the Monte Carlo Localization (MCL) algorithm for localizing the robot in its environment. With the particle filter, this algorithm offers potential advantages over the EKF algorithm. THE MCL algorithm involves the motion and sensor update followed by the resampling step. Since the MCL is an iterative process, the algorithm takes the previous belief obtained from randomly generated particles, the actuation input and the sensor measurements and yields a new belief based on the new measurements from the sensors and the prediction step involving the motion model. This project provides an overview of the MCL algorithm in C++. Furthermore, the project implements the Adaptive Monte Carlo Localization (AMCL) package in ROS. Finally, the robot should now be able to localize itself in the simulated environment.
 
+For a quick demo, jump directly to [The video demonstration of the project](#the-video-demonstration-of-the-project)
 
 ## Table of Contents
 
@@ -14,6 +15,7 @@ Next, the project implements the Monte Carlo Localization (MCL) algorithm for lo
    * [How to use](#how-to-use)
    * [Directory Structure](#directory-structure)
    * [Project Overview Setup Instructions and Implementation of the project](#project-overview-setup-instructions-and-implementation-of-the-project)
+   * [The video demonstration of the project](#the-video-demonstration-of-the-project)
    * [Future Work](#future-work)
    * [License](#license)
    * [Contribution](#contribution)
@@ -927,7 +929,7 @@ If you received warning on ```Transform Timeout``` and ```Map Update Loop```, yo
 
 
 
-A video demonstration of the project:
+### The video demonstration of the project:
 
 [![WhereAmI?](WhereAmI-1.png)](https://youtu.be/UmDkyy0C1lE "Where Am I ?")
 
