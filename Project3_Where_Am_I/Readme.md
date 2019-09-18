@@ -912,7 +912,27 @@ If you received warning on ```Transform Timeout``` and ```Map Update Loop```, yo
      ```sh
      $ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
      ```
-     
+**Results**:
+
+![WhereAmI?](WhereAmI-1.png)
+
+
+![WhereAmI?](WhereAmI-2.png)
+
+
+![WhereAmI?](WhereAmI-3.png)
+
+
+![WhereAmI?](WhereAmI-4.png)
+
+
+
+A video demonstration of the project:
+
+[![WhereAmI?](WhereAmI-1.png)](https://youtu.be/UmDkyy0C1lE "Where Am I ?")
+
+_Click on the image above to redirect to Youtube URL_
+
      
 ### Future Work
 Design the robot so that it is capable of continuously monitoring its surroundings and stopping whenever an obstacle is encountered.
