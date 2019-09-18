@@ -8,6 +8,7 @@ This project introduces the student to write ROS Nodes in C++ and explore the va
     + **drive_bot.cpp** - provides a service to navigate the robot through the world environment
     + **process_image.cpp** - subscribes to the camera image, searches and detects a white ball in the robot's field of view. When the ball's position is identified, this node will send a request to the service provided by _drive_bot.cpp_ node which will, in turn, direct the robot towards the white ball.
 
+For a quick demo, jump directly to [The video demonstration of the project](#the-video-demonstration-of-the-project) 
 
 ## Table of Contents
 
@@ -15,6 +16,7 @@ This project introduces the student to write ROS Nodes in C++ and explore the va
    * [How to use](#how-to-use)
    * [Directory Structure](#directory-structure)
    * [Implementation](#implementation)
+   * [The video demonstration of the project](#the-video-demonstration-of-the-project)
    * [Future Work](#future-work)
    * [License](#license)
    * [Contribution](#contribution)
@@ -330,7 +332,9 @@ You should observe something like the following:
 
 ![Screenshot4](rqt_image.png "rqt_image_viewer Chasing the Ball")
 
-A video demonstration of the project:
+
+### The video demonstration of the project:
+
 [![Project2Demo](ScreenshotVideo.png)](https://youtu.be/WoI3yUCTPGI "Go Chase It!")
 _Click on the image above to redirect to Youtube URL_
 
