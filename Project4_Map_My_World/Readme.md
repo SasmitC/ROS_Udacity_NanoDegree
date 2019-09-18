@@ -1,7 +1,7 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://classroom.udacity.com/nanodegrees/nd209/dashboard/overview)
 
 # Project 4 - Map My World
-Welcome to the Mapping and SLAM module. Here, you will learn how the robots build the map of their surrounding environment and perform Simultaneous Localization and Mapping (SLAM). As you recall from the previous project, Localization is the task for the robot to estimate its pose given the map of the environment. However, in many real circumstances, the map may not be known prior either because the area is unexplored or the surroundings change often and the map may not be up to date. That leads us to Mapping, which involves the task of producing the map of the environment given the robot's pose and trajectory. But here's the catch - often in practical and real world problems, you neither have a map nor know the robot's pose. This is when SLAM comes to the rescue!
+Welcome to the Mapping and SLAM module! Here, you will learn how the robots build the map of their surrounding environment and perform Simultaneous Localization and Mapping (SLAM). As you recall from the previous project, Localization is the task for the robot to estimate its pose given the map of the environment. However, in many real circumstances, the map may not be known prior either because the area is unexplored or the surroundings change often and the map may not be up to date. That leads us to Mapping, which involves the task of producing the map of the environment given the robot's pose and trajectory. But here's the catch - often in practical and real world problems, you neither have a map nor know the robot's pose. This is when SLAM comes to the rescue!
 
 With limited access only to robot's own movement (odometry) data and sensor measurements, the robot must build the map of its environment while simultaneously localizing itself relative to the map. Although robot mapping sounds similar to localization, it assumes an old path and estimates the configuration of the environment as opposed to a given known map and estimating the environment, as we saw in the previous localization project. While the robot's pose has a finite-dimensional space, namely x and y coordinates and orientation angle theta, the map generally lies in a continuous space and as a result, there are infinitely many variables to describe it. Along with uncertainty in the perception using sensors and the nature of the configuration space, mapping becomes a very challenging task. Here, you will be introduced to the **Occupancy Grid Mapping**.
 
@@ -16,6 +16,7 @@ SLAM algorithms can be categorized as:
 
 In this module, you will be dealing with the **FastSLAM** algorithm, which is based on the particle filter approach combined with a low dimensional EKF to solve the SLAM problem. You will adopt this to _Grid Maps_, resulting in **Grid Based fastSLAM** algorithm. Moreover, you will learn **GraphSLAM**, which uses constraints to represent the relationships between the robot poses and the environment to generate a most likely map given the measurement data. Another flavour of _GraphSLAM_, known as the **Real Time Appearance Based Mapping** or **RTABMAP** will be used later in the project.
 
+For viewing the output, jump directly to [Results](#results)
 
 ## Table of Contents
 
@@ -23,11 +24,24 @@ In this module, you will be dealing with the **FastSLAM** algorithm, which is ba
    * [How to use](#how-to-use)
    * [Directory Structure](#directory-structure)
    * [Project Implementation](#project-implementation)
+   * [Results](#results)
    * [Future Work](#future-work)
    * [License](#license)
    * [Contribution](#contribution)
 
+
 ### Requirements
+1. Linux OS or a Virtual Machine for Windows/Mac OS
+2. Github
+3. C++
+4. ROS kinetic version
+5. Gazebo
+6. Understanding of [probabilistic robotics](http://www.probabilistic-robotics.org/), [posterior probability](https://en.wikipedia.org/wiki/Posterior_probability) and [log probability](https://en.wikipedia.org/wiki/Log_probability)
+7. Understanding of [SLAM](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping) and [robot navigation](https://en.wikipedia.org/wiki/Robot_navigation)
+8. Understanding to 2D and 3D Mapping, [Occupance Grid Mapping](https://en.wikipedia.org/wiki/Occupancy_grid_mapping), its [ROS packages](http://wiki.ros.org/octomap) for eg. [Octomap](http://octomap.github.io/)
+9. Understanding of different SLAM algorithms like [FastSLAM](http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam10-fastslam.pdf), [GraphSLAM](http://www2.informatik.uni-freiburg.de/~stachnis/pdf/grisetti10titsmag.pdf), [Grid based FastSLAM](http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam13-gridfastslam.pdf), [gmapping ROS package](http://wiki.ros.org/gmapping)
+10. Understanding of [Real-Time Appearance-Based Mapping (RTAB-Map)](https://arxiv.org/pdf/1809.02989), [RTABMap in ROS](http://www.theconstructsim.com/construct-learn-develop-robots-using-ros/robotigniteacademy_learnros/ros-courses-library/rtab-map-in-ros-101/), [ROS package rtabmap](http://wiki.ros.org/rtabmap_ros)
+
 
 ### How to use
 1. Code the Occupancy Grid Mapping Algorithm in C++: The robot is equipped with **eight sonar rangefinder sensors**. It navigates around in the environment to generate its map. This mini-prpject has been organized as follows -
@@ -614,26 +628,25 @@ Welcome to the project Map My World !
         - On the right you can see the constraint view. This is where you can identify where and how the neighboring links and loop closures were created.
         - You can see the number of loop closures in the bottom left. The codes stand for the following: Neighbor, Neighbor Merged, Global Loop closure, Local loop closure by space, Local loop closure by time, User loop closure, and Prior link.
 	
-    + **Output Results**:
-	
-	
-	![rtab-map-rviz](MappedWorld2.png)
-	
-	
-	![rtab-map-3D-1](MappedWorld3.png)
-	
-	
-	![rtab-map-3D-2](MappedWorld4.png)
-	
-	
-	
         
 7. RTAB-Map Localization: If you desire to perform localization using the map you created, there are only a few changes you need to make. You can start by duplicating your ```mapping.launch``` file and renaming the duplicated file to ```localization.launch```. This is another method for localization you can keep in mind when working on your next robotics project. The following changes also need to be made to the localization.launch file -
 
     + Remove the ```args="--delete_db_on_start"``` from your node launcher since you will need your database to localize too.
     + Remove the ```Mem/NotLinkedNodesKept``` parameter
     + Add the ```Mem/IncrementalMemory``` parameter of type ```string``` and set it to ```false``` to finalize the changes needed to put the robot into localization mode.
-    
+	
+
+### Results	
+	
+![rtab-map-rviz](MappedWorld2.png)
+	
+	
+![rtab-map-3D-1](MappedWorld3.png)
+	
+	
+![rtab-map-3D-2](MappedWorld4.png)
+	
+	    
 ### Future Work
 Try to build different simulation environments and evaluate the performance between them.
 
