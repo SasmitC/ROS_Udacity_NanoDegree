@@ -17,12 +17,16 @@ The outcome of this module include recognizing different types of path planning 
 
 For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
 
+For a quick demo, jump directly to [The video demonstration of the project](#the-video-demonstration-of-the-project)
+
+
 ## Table of Contents
 
    * [Requirements](#requirements)
    * [How to use](#how-to-use)
    * [Directory Structure](#directory-structure)
    * [Project Implementation](#project-implementation)
+   * [The video demonstration of the project](#the-video-demonstration-of-the-project)
    * [Future Work](#future-work)
    * [License](#license)
    * [Contribution](#contribution)
@@ -663,7 +667,8 @@ For eg. the Bug Algorithm is neither _Complete_ nor _Optimal_.
 	+ Show the marker at the drop off zone once your robot reaches it
 	
 
-A video demonstration of the project:
+### The video demonstration of the project:
+
 [![HomeServiceRobot](HomeServiceRobot.png)](https://youtu.be/HwDrsTUudWY "Home Service Robot")
 
 _Click on the image above to redirect to Youtube URL_
