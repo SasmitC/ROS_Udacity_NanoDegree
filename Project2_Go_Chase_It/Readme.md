@@ -336,6 +336,7 @@ You should observe something like the following:
 ### The video demonstration of the project:
 
 [![Project2Demo](ScreenshotVideo.png)](https://youtu.be/WoI3yUCTPGI "Go Chase It!")
+
 _Click on the image above to redirect to Youtube URL_
 
 ### Future Work
