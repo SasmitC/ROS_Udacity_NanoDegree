@@ -44,7 +44,7 @@ For viewing the output, jump directly to [Results](#results)
 
 
 ### How to use
-1. Code the Occupancy Grid Mapping Algorithm in C++: The robot is equipped with **eight sonar rangefinder sensors**. It navigates around in the environment to generate its map. This mini-prpject has been organized as follows -
+1. Code the [Occupancy Grid Mapping Algorithm in C++](https://github.com/SasmitC/ROS_Udacity_NanoDegree/tree/master/Project4_Map_My_World/OccupancyGridMapping): The robot is equipped with **eight sonar rangefinder sensors**. It navigates around in the environment to generate its map. This mini-prpject has been organized as follows -
     + Data
         - ```measurement.txt```: The measurements from the sonar rangefinder sensors attached to the robot at each time stamp recorded over a period of 413 seconds (timestamp, measurement 1:8).
         - ```poses.txt```: The exact robot poses at each timestamp recorded over a period of 413 seconds (timestamp, x, y, ϴ).
@@ -213,7 +213,7 @@ int main()
     ```sh
     $ ./map_app
     ```
-    + Now, wait for the program to generate the map and store it in the Project4_Map_My_World/OccupancyGridMapping/Images directory. The generated map should look something like the following -
+    + Now, wait for the program to generate the map and store it in the [Images directory](https://github.com/SasmitC/ROS_Udacity_NanoDegree/tree/master/Project4_Map_My_World/OccupancyGridMapping/Images). The generated map should look something like the following -
     + Map Legend:
         - ![#f03c15](https://placehold.it/15/008000/000000?text=+ "Green - Unknown/Undiscovered Zone") `Green - Unknown/Undiscovered Zone`
         - ![#f03c15](https://placehold.it/15/ff0000/000000?text=+ "Red - Free Zone") `Red - Free Zone`
@@ -412,7 +412,7 @@ Welcome to the project Map My World !
     ```sh
 	  $ roslaunch my_robot world.launch
 	  ```
-2. Senosr Upgrade: Add an ```optical``` camera link - For RGB-D camera in URDF file, we need to add an extra link and an extra joint to the camera link in order to align the camera image in Gazebo properly with the robot. Note that the parent link of ```camera_optical_joint``` should be properly configured to the original camera link.
+2. Sensor Upgrade: Add an ```optical``` camera link - For RGB-D camera in URDF file, we need to add an extra link and an extra joint to the camera link in order to align the camera image in Gazebo properly with the robot. Note that the parent link of ```camera_optical_joint``` should be properly configured to the original camera link.
 
     + Add the following joint and link to the robot's ```.xacro``` file -
     ```xml
