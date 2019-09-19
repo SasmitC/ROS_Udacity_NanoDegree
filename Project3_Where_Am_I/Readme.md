@@ -940,7 +940,7 @@ _Click on the image above to redirect to Youtube URL_
 Design the robot so that it is capable of continuously monitoring its surroundings and stopping whenever an obstacle is encountered.
 
 ### License
-MIT License
+MIT License Copyright (c) 2019 Udacity
 
 ### Contribution
 You may contribute to this project by forking this GitHub repository, creating pull requests or by raising issues.
