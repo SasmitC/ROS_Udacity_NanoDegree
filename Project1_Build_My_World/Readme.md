@@ -176,7 +176,7 @@ $ gazebo myworld --verbose
 Implement multiple models that interact through model plugins inside the Gazebo world. Explore additional features of the Gazebo simulation environment.
 
 ### License
-MIT License
+MIT License Copyright (c) 2019 Udacity
 
 ### Contribution
 You may contribute to this project by forking this GitHub repository, creating pull requests or by raising issues.
