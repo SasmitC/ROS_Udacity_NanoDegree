@@ -651,7 +651,7 @@ Welcome to the project Map My World !
 Try to build different simulation environments and evaluate the performance between them.
 
 ### License
-MIT License
+MIT License Copyright (c) 2019 Udacity
 
 ### Contribution
 You may contribute to this project by forking this GitHub repository, creating pull requests or by raising issues.
