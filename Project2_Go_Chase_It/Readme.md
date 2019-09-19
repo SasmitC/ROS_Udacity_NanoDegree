@@ -343,7 +343,7 @@ _Click on the image above to redirect to Youtube URL_
 Implement skid-steer robot designs or robots that can chase balls of any color.
 
 ### License
-MIT License
+MIT License Copyright (c) 2019 Udacity
 
 ### Contribution
 You may contribute to this project by forking this GitHub repository, creating pull requests or by raising issues.
