@@ -849,7 +849,7 @@ $ sudo apt-get install ros-kinetic-amcl
         </launch>
         ```
         - The various nodes added are -
-            + The [```map_server``` node](http://wiki.ros.org/map_server): It provides the map data as a ROS service to other nodes, for eg. ```amcl``` node. It locates the map you created in Step #2 of (#project-overview-setup-instructions-and-implementation-of-the-project) and send it out as map data.
+            + The [```map_server``` node](http://wiki.ros.org/map_server): It provides the map data as a ROS service to other nodes, for eg. ```amcl``` node. It locates the map you created in Step #2 of [Project Overview Setup Instructions and Implementation of the project](#project-overview-setup-instructions-and-implementation-of-the-project) and send it out as map data.
             + The ```amcl``` node: As discussed above, this node takes ```odometry``` and ```laser scan``` as input data and performs AMCL localization. By default, ```amcl``` package will look for the scan topic for LiDAR data, which in this case is ```Hokuyo```. Alternatively, if your simulation maps the laser data to your robot's topic, you can use ```remap``` tag to remap the topic name ```scan``` to the actual robot topic name so that the ```amcl``` package could use it! This is how you can add ```remap``` tag and for more info check out the [```remap``` ROS Wiki](http://wiki.ros.org/roslaunch/XML/remap). As described in the [ROS Wiki](http://wiki.ros.org/amcl), you can find the purpose of different parameters of the ```amcl``` node. Since the AMCL package 'links' the robot (```odom``` frame) with the world (```map``` frame), these parameters are required for ```amcl``` package to localize the robot in the world.
                 ```xml
                 ...
