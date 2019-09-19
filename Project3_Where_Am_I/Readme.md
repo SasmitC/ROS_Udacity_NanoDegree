@@ -1,11 +1,11 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://classroom.udacity.com/nanodegrees/nd209/dashboard/overview)
 
 # Project 3 - Where Am I
-Localization is a challenging problem of determining a robot's position and orientation (together known as its pose) in a mapped environment. Usually, this is achieved by implementing a probabilistic algorithm to filter noisy sensor measurements and track the robot's pose. This project introduces two common localization algorithms, namely, the Extended Kalman Filter (EKF) localization and the Monte Carlo localization (MCL), also known as the particle filter algorithm. The multidimensional EKF helps in estimating the state variables comprising of the kinematic parameters for non-linear motion models. Whereas the particle filter uses randomly sampled values of the state known as particles to estimate the robot's state with respect to its environment. Due to the prevailing uncertainty in the sensor measurements, identifying the pose of the robot relative to its environment is prone to errors. This makes localization a non-trivial task. Here, a static environment is used for the purpose of ground truth measurement.
+Localization is a challenging problem of determining a robot's position and orientation (together known as its pose) in a mapped environment. Usually, this is achieved by implementing a probabilistic algorithm to filter noisy sensor measurements and track the robot's pose. This project introduces two common localization algorithms, namely, the Extended Kalman Filter (EKF) localization and the Monte Carlo localization (MCL), also known as the particle filter algorithm. The multidimensional EKF helps in estimating the state variables comprising of the kinematic parameters for non-linear motion models. Whereas the particle filter uses randomly sampled values of the state known as particles to estimate the robot's pose with respect to its environment. Due to the prevailing uncertainty in the sensor measurements, identifying the pose of the robot relative to its environment is prone to errors. This makes localization a non-trivial task. Here, a static environment is used for the purpose of ground truth measurement.
 
 The project starts with a C++ implementation of the Extended Kalman Filter (EKF) and introduces the EKF package in ROS known as the _robot_pose_ekf_. This package combines all the noisy measurements, compares the data generated from the robot's onboard sensors such as the inertial measurement unit (IMU), rotary encoder and vision sensors viz. camera and lidar, filters the noise and removes the uncertainties. It further applies sensor fusion by combining the data from all these sensors in order to better estimate the robot's pose as it moves around. This project also implements the _turtlebot_gazebo_, _odom_to_trajectory_, _turtlebot_teleop_ and the _rviz_ package. It integrates all nodes of the above five packages into a single _launch_ file.
 
-Next, the project implements the Monte Carlo Localization (MCL) algorithm for localizing the robot in its environment. With the particle filter, this algorithm offers potential advantages over the EKF algorithm. THE MCL algorithm involves the motion and sensor update followed by the resampling step. Since the MCL is an iterative process, the algorithm takes the previous belief obtained from randomly generated particles, the actuation input and the sensor measurements and yields a new belief based on the new measurements from the sensors and the prediction step involving the motion model. This project provides an overview of the MCL algorithm in C++. Furthermore, the project implements the Adaptive Monte Carlo Localization (AMCL) package in ROS. Finally, the robot should now be able to localize itself in the simulated environment.
+Next, the project implements the Monte Carlo Localization (MCL) algorithm for localizing the robot in its environment. With the particle filter, this algorithm offers potential advantages over the EKF algorithm. The MCL algorithm involves the motion and sensor update followed by the resampling step. Since the MCL is an iterative process, the algorithm takes the previous belief obtained from randomly generated particles, the actuation input and the sensor measurements and yields a new belief based on the new measurements from the sensors and the prediction step involving the motion model. This project provides an overview of the MCL algorithm in C++. Furthermore, the project implements the Adaptive Monte Carlo Localization (AMCL) package in ROS. Finally, the robot should be able to localize itself in the simulated environment.
 
 For a quick demo, jump directly to [The video demonstration of the project](#the-video-demonstration-of-the-project)
 
@@ -238,7 +238,7 @@ $ catkin_make
         <remap from="imu_data" to="/mobile_base/sensors/imu_data" />	
       </node>
 
-      <!-- TurleBot Gazzebo-->
+      <!-- TurleBot Gazebo-->
       <arg name="world_file"  default="$(env TURTLEBOT_GAZEBO_WORLD_FILE)"/>
 
       <arg name="base"      value="$(optenv TURTLEBOT_BASE kobuki)"/> <!-- create, roomba -->
@@ -289,6 +289,7 @@ $ catkin_make
 
     </launch>
     ```
+    
     + Launch the ```main.launch``` file
     ```sh
     $ cd ~/catkin_ws/
@@ -620,6 +621,7 @@ $ catkin_make
         return 0;
     }
     ```
+    
     + Compile the code using -
     ```sh
     $ cd ~/catkin_ws/src
@@ -714,9 +716,9 @@ $ sudo apt-get install ros-kinetic-amcl
     + Grab the code from the [previous project](https://github.com/SasmitC/ROS_Udacity_NanoDegree/tree/master/Project2_Go_Chase_It/catkin_ws/src/my_robot). Create a catkin package by the same name my_robot and copy the contents of above repository into the newly created package on your local machine.
 
     + Do a quick ```$catkin_make``` and ```$source the devel/setup.bash``` script. Launch the world to verify if the system is good to go!
-	```sh
-	$ roslaunch my_robot world.launch
-	```
+    ```sh
+    $ roslaunch my_robot world.launch
+    ```
 
 2. Map Setup:
     + Now that the simulation environment is ready, let us generate a map of it so that the robot knows what to expect when its positioned inside the environment. In reality, engineers utilize Mapping tools to measure and map the area that the robot will be operating in. However, for simplicity, a simulated environment saves us from the going deeper into the advanced mapping challenges. It is possible to generate the map of any simulated world by directly using the ROS package - [pgm_map_creator](https://github.com/udacity/pgm_map_creator).
