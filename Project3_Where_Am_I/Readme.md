@@ -713,9 +713,9 @@ $ sudo apt-get install ros-kinetic-amcl
 ```
 
 1. Simulation Setup:
-    + Grab the code from the [previous project](https://github.com/SasmitC/ROS_Udacity_NanoDegree/tree/master/Project2_Go_Chase_It/catkin_ws/src/my_robot). Create a catkin package by the same name my_robot and copy the contents of above repository into the newly created package on your local machine.
+    + Grab the code from the [previous project](https://github.com/SasmitC/ROS_Udacity_NanoDegree/tree/master/Project2_Go_Chase_It/catkin_ws/src/my_robot). Create a catkin package by the same name ```my_robot``` and copy the contents of above repository into the newly created package on your local machine.
 
-    + Do a quick ```$catkin_make``` and ```$source the devel/setup.bash``` script. Launch the world to verify if the system is good to go!
+    + Do a quick ```$ catkin_make``` and source the ```devel/setup.bash``` script. Launch the world to verify if the system is good to go!
     ```sh
     $ roslaunch my_robot world.launch
     ```
@@ -723,7 +723,7 @@ $ sudo apt-get install ros-kinetic-amcl
 2. Map Setup:
     + Now that the simulation environment is ready, let us generate a map of it so that the robot knows what to expect when its positioned inside the environment. In reality, engineers utilize Mapping tools to measure and map the area that the robot will be operating in. However, for simplicity, a simulated environment saves us from the going deeper into the advanced mapping challenges. It is possible to generate the map of any simulated world by directly using the ROS package - [pgm_map_creator](https://github.com/udacity/pgm_map_creator).
 
-    + The map that ROS AMCL Package uses is a pgm file. A pgm file is a grayscale image file. For more information about pgm file or more generally, pnm file, please refer to [Netpbm format Wiki Page](https://en.wikipedia.org/wiki/Netpbm_format).
+    + The map that ROS AMCL Package uses is a ```.pgm``` file. A pgm file is a grayscale image file. For more information about ```.pgm``` file or more generally, ```.pnm``` file, please refer to [Netpbm format Wiki Page](https://en.wikipedia.org/wiki/Netpbm_format).
 
     + By default, AMCL package will treat 'darker' pixels as obstacle in the pgm map file, and 'lighter' pixels as free space. The threshold could be set as a parameter which we will cover when we are building the launch file.
 
@@ -849,8 +849,8 @@ $ sudo apt-get install ros-kinetic-amcl
         </launch>
         ```
         - The various nodes added are -
-            + The [```map_server``` node](http://wiki.ros.org/map_server): It provides the map data as a ROS service to other nodes, for eg. ```amcl``` node. It locates the map you created in Step #2 of (#project-overview,-setup-instructions-and-implementation-of-the-project) and send it out as map data.
-            + The ```amcl``` node: As discussed above, this node takes ```odometry``` and ```laser scan``` as input data and performs AMCL localization. By default, ```amcl``` package will look for the scan topic for LiDAR data, which in this case is ```Hokuyo```. Alternatively, if your simulation maps the laser data to your robot's topic, you can use ```remap``` tag to remap the topic name ```scan``` to the actual topic name so that the ```amcl``` package could use it! This is how you can add ```remap``` tag and for more info check out the [```remap``` ROS Wiki](http://wiki.ros.org/roslaunch/XML/remap). As described in the [ROS Wiki](http://wiki.ros.org/amcl), you can find the purpose of different parameters of the ```amcl``` node. Since the AMCL package 'links' the robot (```odom``` frame) with the world (```map``` frame), these parameters are required for ```amcl``` package to localize the robot in the world.
+            + The [```map_server``` node](http://wiki.ros.org/map_server): It provides the map data as a ROS service to other nodes, for eg. ```amcl``` node. It locates the map you created in Step #2 of (#project-overview-setup-instructions-and-implementation-of-the-project) and send it out as map data.
+            + The ```amcl``` node: As discussed above, this node takes ```odometry``` and ```laser scan``` as input data and performs AMCL localization. By default, ```amcl``` package will look for the scan topic for LiDAR data, which in this case is ```Hokuyo```. Alternatively, if your simulation maps the laser data to your robot's topic, you can use ```remap``` tag to remap the topic name ```scan``` to the actual robot topic name so that the ```amcl``` package could use it! This is how you can add ```remap``` tag and for more info check out the [```remap``` ROS Wiki](http://wiki.ros.org/roslaunch/XML/remap). As described in the [ROS Wiki](http://wiki.ros.org/amcl), you can find the purpose of different parameters of the ```amcl``` node. Since the AMCL package 'links' the robot (```odom``` frame) with the world (```map``` frame), these parameters are required for ```amcl``` package to localize the robot in the world.
                 ```xml
                 ...
                 <!-- AMCL Node -->
