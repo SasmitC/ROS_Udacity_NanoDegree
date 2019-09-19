@@ -2,7 +2,7 @@
 
 # Project 1 - Build My World
 
-In this project, I created a Gazebo simulation of an office environment that goes by the name MyOfficeWorld.world. I also built a Gazebo model of a customized differential drive robot and equipped it with Gazebo plugins, for instance, hokuyo laser scanner and a RGB camera sensor. The project also teaches the student to insert plugins, which are nothing but C++ code snippets that interact with the Gazebo world file. This Gazebo world and the robot model was used for all subsequent projects.
+In this project, I created a Gazebo simulation of an office environment that goes by the name ```MyOfficeWorld.world```. I also built a Gazebo model of a customized differential drive robot and equipped it with Gazebo plugins, for instance, hokuyo laser scanner and a RGB camera sensor. The project teaches the student to insert plugins, which are nothing but C++ code snippets that interact with the Gazebo world file. This Gazebo world and the robot model will be used for all subsequent projects.
 
 
 ## Table of Contents
@@ -58,7 +58,7 @@ $ git clone https://github.com/SasmitC/ROS_Udacity_NanoDegree.git
 $ cd ROS_Udacity_NanoDegree
 ```
 
-4. Copy the contents from the 'Project2_Go_Chase_It/catkin_ws' directory, excluding the CMakeLists.txt and package.xml (delete these two files before building the project or modify the relative path directories in these two files), into your '~/catkin_ws' local src directory
+4. Copy the contents from the ```Project2_Go_Chase_It/catkin_ws``` directory, excluding the ```CMakeLists.txt``` and ```package.xml``` (delete these two files before building the project or modify the relative path directories in these two files), into your ```~/catkin_ws``` local ```src``` directory
 
 5. Build the project using -
 ```sh
@@ -66,7 +66,7 @@ $ cd ~/catkin_ws
 $ catkin_make
 ```
 
-6. Add the following to your .bashrc file, so that you do not need to source the environment while opening a new terminal window each time -
+6. Add the following to your ```.bashrc``` file, so that you do not need to source the environment while opening a new terminal window each time -
 ```sh
 export GAZEBO_MODEL_PATH=~/catkin_ws/model/MyUdacityOffice
 source ~/catkin_ws/devel/setup.bash
@@ -105,19 +105,19 @@ I created my world file and robot model file which I will use for all the subseq
 2. Model any object of your choice using the Model Editor tool in Gazebo. Your model links should be connected with joints.
 Import your structure and two instances of your model inside an empty Gazebo World.
 3. Import several models from the Gazebo online library and implement it in your existing Gazebo world.
-4. Write a C++ World Plugin to interact with your world. Your code should display “Welcome to <your>’s World!” message as soon as you launch the Gazebo world file.
+4. Write a C++ World Plugin to interact with your world. Your code should display “Welcome to MyUdacityOffice’s World!” message as soon as you launch the Gazebo world file.
   
 These are basic tasks to be performed while building a world file of your own.
 
 #### World Files
-A **.world** file contains all the entities in the simulated environment. They are robot models, lighting, sensors and other features. You can save the file with a ```sh .world ``` extension.
+A **world** file contains all the entities in the simulated environment. They are robot models, lighting, sensors and other features. You can save the file with a ```.world ``` extension.
 
 To launch a .world file enter the following into terminal - 
 ```sh
 $ gazebo <yourworld>.world
 ```
 
-The **world** file is formatted using the simulation description format or **.sdf** in short. This is how a **SDF word** file template looks like - 
+The **world** file is formatted using the simulation description format or ```sdf``` in short. This is how a **SDF word** file template looks like - 
 
 ```xml
 <?xml version="1.0" ?>
